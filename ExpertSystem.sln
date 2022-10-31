@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertSystem", "src\ExpertSystem\ExpertSystem.csproj", "{64BC24DC-6F78-4F49-90DC-2134C24C22BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertSystemUIClient", "src\ExpertSystemUIClient\ExpertSystemUIClient.csproj", "{4CE975F6-B9A8-4E88-9617-B7FCBF162800}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertSystemUIRuleCreator", "src\ExpertSystemUIRuleCreator\ExpertSystemUIRuleCreator.csproj", "{D61720F4-3B06-4367-A84F-4AF6B3C5D73E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{64BC24DC-6F78-4F49-90DC-2134C24C22BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64BC24DC-6F78-4F49-90DC-2134C24C22BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64BC24DC-6F78-4F49-90DC-2134C24C22BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64BC24DC-6F78-4F49-90DC-2134C24C22BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4CE975F6-B9A8-4E88-9617-B7FCBF162800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4CE975F6-B9A8-4E88-9617-B7FCBF162800}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4CE975F6-B9A8-4E88-9617-B7FCBF162800}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4CE975F6-B9A8-4E88-9617-B7FCBF162800}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D61720F4-3B06-4367-A84F-4AF6B3C5D73E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D61720F4-3B06-4367-A84F-4AF6B3C5D73E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D61720F4-3B06-4367-A84F-4AF6B3C5D73E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D61720F4-3B06-4367-A84F-4AF6B3C5D73E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

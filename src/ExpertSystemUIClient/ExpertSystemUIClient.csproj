@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>WinExe</OutputType>
+        <TargetFramework>net6.0-windows</TargetFramework>
+        <Nullable>enable</Nullable>
+        <UseWPF>true</UseWPF>
+        <RootNamespace>ExpertSystemUI</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Update="knowledgeBase.json">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\ExpertSystem\ExpertSystem.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Remove="obj\**" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Page Remove="obj\**" />
+    </ItemGroup>
+
+</Project>
