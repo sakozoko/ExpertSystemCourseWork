@@ -5,7 +5,9 @@ using ExpertSystemUIRuleCreator.Command;
 using ExpertSystemUIRuleCreator.Extension;
 using ExpertSystemUIRuleCreator.Model;
 using ExpertSystemUIRuleCreator.Service;
+using ExpertSystemUIRuleCreator.View;
 using ExpertSystemUIRuleCreator.ViewModel.Base;
+using MaterialDesignThemes.Wpf;
 
 namespace ExpertSystemUIRuleCreator.ViewModel;
 
@@ -21,6 +23,14 @@ public class MainWindowViewModel : ViewBase
         _rule = new RuleModel();
 
         Rules = new ObservableCollection<RuleModel>();
+        var rule = new RuleModel() { Name = "Rule 1" };
+        rule.Conditions.Add(new RuleCondition(){ Variable = "Condition 1", Value = "1", Condition = "="});
+        rule.Conditions.Add(new RuleCondition(){ Variable = "Condition 2", Value = "2", Condition = "="});
+        rule.Conditions.Add(new RuleCondition(){ Variable = "Condition 3", Value = "2", Condition = "="});
+        rule.Result.Value = "asdas";
+        rule.Result.Variable = "asdas";
+        Rules.Add(rule);
+        Rules.Add(rule);
 
         var ruleSource = new JsonRuleSource("knowledgeBase.json");
 
@@ -46,9 +56,19 @@ public class MainWindowViewModel : ViewBase
 
     public IEnumerable<string> PossibleConditions { get; }
 
-    private void ExecuteRemovingRule(object? parameter)
+    private async void ExecuteRemovingRule(object? parameter)
     {
-        if (parameter is RuleModel rule) Rules.Remove(rule);
+        if (parameter is not RuleModel rule) return;
+        
+        var view = new RemoveRuleDialog
+        {
+            DataContext = new RemoveRuleDialogViewModel(rule)
+        };
+        var res = await DialogHost.Show(view,"RootDialog");
+        if (res is true)
+        {
+            Rules.Remove(rule);
+        }
     }
 
     private void ExecuteAddingCondition(object? parameter)

@@ -32,4 +32,8 @@
       <Page Remove="obj\**" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci358" />
+    </ItemGroup>
+
 </Project>
