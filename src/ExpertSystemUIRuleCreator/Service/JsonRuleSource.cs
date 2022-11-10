@@ -28,11 +28,12 @@ public class JsonRuleSource : IRuleSource
         await using var sw = new StreamWriter(_path).BaseStream;
         await JsonSerializer.SerializeAsync(sw, rulesList);
     }
-    
+
     public async Task<IEnumerable<JsonRule>> GetAll()
     {
         await using var sr = new StreamReader(_path).BaseStream;
-        var rules = await  JsonSerializer.DeserializeAsync<JsonRule[]>(sr).ConfigureAwait(false) ?? Array.Empty<JsonRule>();
+        var rules = await JsonSerializer.DeserializeAsync<JsonRule[]>(sr).ConfigureAwait(false) ??
+                    Array.Empty<JsonRule>();
         return rules;
     }
 
@@ -41,7 +42,7 @@ public class JsonRuleSource : IRuleSource
         //remove model from json file
         var rules = await GetAll();
         var rulesList = rules.ToList();
-        rulesList.Remove(rulesList.FirstOrDefault(c => c.Name?.Equals(model.Name)??false)??new JsonRule());
+        rulesList.Remove(rulesList.FirstOrDefault(c => c.Name?.Equals(model.Name) ?? false) ?? new JsonRule());
         await using var sw = new StreamWriter(_path).BaseStream;
         await JsonSerializer.SerializeAsync(sw, rulesList);
     }

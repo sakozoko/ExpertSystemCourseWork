@@ -8,8 +8,6 @@ namespace ExpertSystemUIRuleCreator.Service;
 
 public class RuleSavingService
 {
-    public ObservableCollection<RuleModel> Rules { get; }
-
     public RuleSavingService(IRuleSource ruleSource)
     {
         RuleSource = ruleSource;
@@ -17,8 +15,9 @@ public class RuleSavingService
         Rules = new ObservableCollection<RuleModel>(RuleSource.GetAll()
             .Result
             .Select(c => c.ToRuleModel()));
-
     }
+
+    public ObservableCollection<RuleModel> Rules { get; }
 
     private IRuleSource RuleSource { get; }
 
@@ -28,6 +27,7 @@ public class RuleSavingService
         RuleSource.Add(rule);
         Rules.Add(model);
     }
+
     public void Remove(RuleModel model)
     {
         var rule = model.ToJsonRule();

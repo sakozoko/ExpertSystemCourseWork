@@ -8,14 +8,13 @@
              TextElement.FontWeight="Medium"
              TextElement.FontSize="14"
              FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:control="clr-namespace:ExpertSystemUIRuleCreator.View.Control"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <TabControl SelectedIndex="0" >
-            <control:TabItemRules DataContext="{Binding TabItemRulesViewModel}"/>
-            <control:TabItemAddRule DataContext="{Binding TabItemAddRuleViewModel}"/>
+        <TabControl SelectedIndex="0">
+            <control:TabItemRules DataContext="{Binding TabItemRulesViewModel}" />
+            <control:TabItemAddRule DataContext="{Binding TabItemAddRuleViewModel}" />
         </TabControl>
     </Grid>
 </UserControl>

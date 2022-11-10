@@ -11,28 +11,27 @@ namespace ExpertSystemUIRuleCreator.ViewModel;
 
 public class TabItemRulesViewModel : ViewBase
 {
-    private RuleSavingService _savingService;
+    private readonly RuleSavingService _savingService;
+
     public TabItemRulesViewModel(RuleSavingService ruleSavingService)
     {
-        _savingService=ruleSavingService;
+        _savingService = ruleSavingService;
         Rules = ruleSavingService.Rules;
         RemoveRuleCommand = new LambdaCommand(ExecuteRemovingRule);
     }
 
     public ObservableCollection<RuleModel> Rules { get; }
+    public ICommand RemoveRuleCommand { get; }
+
     private async void ExecuteRemovingRule(object? parameter)
     {
         if (parameter is not RuleModel rule) return;
-        
+
         var view = new RemoveRuleDialog
         {
             DataContext = rule
         };
-        var res = await DialogHost.Show(view,"RootDialog");
-        if (res is true)
-        {
-            _savingService.Remove(rule);
-        }
+        var res = await DialogHost.Show(view, "RootDialog");
+        if (res is true) _savingService.Remove(rule);
     }
-    public ICommand RemoveRuleCommand { get; }
 }

@@ -16,9 +16,9 @@
     <Window.DataContext>
         <viewModel:MainWindowViewModel />
     </Window.DataContext>
-    <materialDesign:DialogHost Identifier="RootDialog">
-    <Grid>
-        <control:Main DataContext="{Binding MainViewModel}"/>
-    </Grid>
+    <materialDesign:DialogHost Identifier="RootDialog" CloseOnClickAway="True">
+        <Grid>
+            <control:Main DataContext="{Binding MainViewModel}" />
+        </Grid>
     </materialDesign:DialogHost>
 </Window>
