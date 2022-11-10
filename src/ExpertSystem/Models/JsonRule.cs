@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ExpertSystem.Models;
+﻿namespace ExpertSystem.Models;
 
 public class JsonRule
 {

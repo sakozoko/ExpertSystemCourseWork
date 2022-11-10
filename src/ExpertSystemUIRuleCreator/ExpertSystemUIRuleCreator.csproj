@@ -14,9 +14,9 @@
 
     <ItemGroup>
         <None Remove="knowledgeBase.json" />
-        <Resource Include="knowledgeBase.json">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Resource>
+        <EmbeddedResource Include="knowledgeBase.json">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
         <None Remove="obj\**" />
     </ItemGroup>
 

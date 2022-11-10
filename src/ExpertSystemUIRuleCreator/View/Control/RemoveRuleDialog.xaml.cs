@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace ExpertSystemUIRuleCreator.View;
+namespace ExpertSystemUIRuleCreator.View.Control;
 
 public partial class RemoveRuleDialog : UserControl
 {

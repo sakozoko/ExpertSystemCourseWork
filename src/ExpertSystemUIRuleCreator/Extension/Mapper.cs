@@ -30,6 +30,26 @@ public static class Mapper
         return resultRule;
     }
 
+    public static RuleModel ToRuleModel(this JsonRule rule)
+    {
+        var model = new RuleModel() { Name = rule.Name };
+        foreach (var jsonClause in rule.Antecedent)
+        {
+            model.Conditions.Add(new RuleCondition()
+            {
+                Condition = jsonClause.Condition,
+                Value = jsonClause.Value,
+                Variable = jsonClause.Variable
+            });
+        }
+
+        model.Result.Condition = rule.Consequent!.Condition;
+        model.Result.Value = rule.Consequent.Value;
+        model.Result.Variable = rule.Consequent.Variable;
+        
+        return model;
+    }
+
     private static (bool Validated, string ProblemPropertyName) ValidateMapToRule(RuleModel model)
     {
         if (string.IsNullOrWhiteSpace(model.Name))
