@@ -1,72 +1,66 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Windows.Input;
 using ExpertSystem;
-using ExpertSystemUI.Command;
 using ExpertSystemUI.Model;
 using ExpertSystemUI.ViewModel.Base;
+using ExpertSystemUI.ViewModel.Control;
 
 namespace ExpertSystemUI.ViewModel;
 
 public class MainWindowViewModel : ViewBase
 {
     private readonly RuleInferenceEngineFacade _rief;
-    private string? _result;
-    private ObservableCollection<Variable> _userFacts;
+
+    public CreatingFactViewViewModel CreatingFactViewViewModel { get; }
+    public FactsViewViewModel FactsViewViewModel { get; }
+    public ResultViewViewModel ResultViewViewModel { get; }
 
     public MainWindowViewModel()
     {
-        _userFacts = new ObservableCollection<Variable>();
-        SetRulesCommand = new SetRulesCommand(SetFacts);
-        GetResultCommand = new GetResultCommand(GetResult);
         _rief = new RuleInferenceEngineFacade();
         _rief.SetKnowledgeBase("knowledgeBase.json");
-        PossibleVariables = new ObservableCollection<Variable>(_rief.Variables.Select(x => new Variable { Name = x }));
-        PossibleConditions = _rief.PossibleConditions;
-    }
+        var possibleVariables = new ObservableCollection<Variable>(_rief.Variables.Select(x => new Variable { Name = x }));
 
-    public ICommand SetRulesCommand { get; }
-    public ICommand GetResultCommand { get; }
+        FactsViewViewModel = new FactsViewViewModel();
 
-    public ObservableCollection<Variable> UserFacts
-    {
-        get => _userFacts;
-        set => SetField(ref _userFacts, value);
-    }
-
-    public string? Result
-    {
-        get => _result;
-        private set => SetField(ref _result, value);
-    }
-
-    public ObservableCollection<Variable> PossibleVariables { get; }
-
-    public string[] PossibleConditions { get; }
-
-    private void SetFacts()
-    {
-        _rief.ClearFacts();
-        UserFacts.Clear();
-        _rief.SetFacts(PossibleVariables.Select(x => x.Deconstruct()));
-        _rief.Facts.ForEach(v =>
+        ResultViewViewModel= new ResultViewViewModel
         {
-            if (v is null) return;
-            var firstOrDefaultFact = UserFacts.FirstOrDefault(c => v.Variable.Equals(c.Name));
+            Facts = FactsViewViewModel.Facts,
+            GetResultValue = ExecuteResolvingCommand
+        };
+
+        CreatingFactViewViewModel = new CreatingFactViewViewModel
+        {
+            PossibleVariables = possibleVariables,
+            OnFactCreated = CreatingFactViewModelOnFactCreated
+        };
+
+    }
+    private string ExecuteResolvingCommand(IEnumerable<Variable> facts)
+    {
+        _rief.SetFacts(FactsViewViewModel.Facts.Select(x => x.Deconstruct()));
+        var result= _rief.GetResult("");
+        _rief.ClearFacts();
+        return result;
+    }
+
+    private void CreatingFactViewModelOnFactCreated(IEnumerable<Variable> obj)
+    {
+        //add only unique variables to user facts, if value is not unique, update it
+        foreach (var variable in obj)
+        {
+            var firstOrDefaultFact = FactsViewViewModel.Facts.FirstOrDefault(c => variable.Name?.Equals(c.Name)??false);
             if (firstOrDefaultFact is null)
             {
-                UserFacts.Add(new Variable { Name = v.Variable, Condition = v.Condition, InputValue = v.Value });
+                FactsViewViewModel.Facts.Add((Variable)variable.Clone());
             }
             else
             {
-                firstOrDefaultFact.InputValue = v.Value;
-                firstOrDefaultFact.Condition = v.Condition;
+                firstOrDefaultFact.InputValue = variable.InputValue;
+                firstOrDefaultFact.Condition = variable.Condition;
             }
-        });
+        }
     }
 
-    private void GetResult()
-    {
-        Result = _rief.GetResult("");
-    }
 }

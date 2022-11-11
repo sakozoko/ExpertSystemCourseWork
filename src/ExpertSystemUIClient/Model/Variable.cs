@@ -1,10 +1,12 @@
-﻿using ExpertSystemUI.ViewModel.Base;
+﻿using System;
+using ExpertSystemUI.Extension;
+using ExpertSystemUI.ViewModel.Base;
 
 namespace ExpertSystemUI.Model;
 
-public class Variable : ViewBase
+public class Variable : ViewBase, ICloneable
 {
-    private string? _condition;
+    private Condition? _condition;
     private string? _inputValue;
     private string? _name;
 
@@ -20,7 +22,7 @@ public class Variable : ViewBase
         set => SetField(ref _inputValue, value);
     }
 
-    public string? Condition
+    public Condition? Condition
     {
         get => _condition;
         set => SetField(ref _condition, value);
@@ -29,12 +31,23 @@ public class Variable : ViewBase
     public void Deconstruct(out string? variable, out string? condition, out string? value)
     {
         variable = Name;
-        condition = Condition;
+        condition = Condition.MapToString();
         value = InputValue;
     }
 
     public (string?, string?, string?) Deconstruct()
     {
-        return (_name, _condition, _inputValue);
+        return (_name, _condition.MapToString(), _inputValue);
+    }
+
+    public object Clone()
+    {
+        //return new cloneable variable
+        return new Variable
+        {
+            Name = Name,
+            Condition = Condition,
+            InputValue = InputValue
+        };
     }
 }
