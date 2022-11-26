@@ -8,12 +8,11 @@ public class MainWindowViewModel : ViewBase
 {
     public MainWindowViewModel()
     {
-        var possibleConditions = new[] { "=", "<", ">" };
 
         var ruleSource = new RuleRepositoryJson("knowledgeBase.json");
 
         var savingService = new RulesManager(ruleSource);
-        MainViewModel = new MainViewModel(possibleConditions, savingService);
+        MainViewModel = new MainViewModel(savingService);
     }
 
     public ViewBase MainViewModel { get; }

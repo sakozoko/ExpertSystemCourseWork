@@ -14,7 +14,18 @@
     <Grid>
         <TabControl SelectedIndex="0">
             <control:TabItemRules DataContext="{Binding TabItemRulesViewModel}" />
-            <control:TabItemAddRule DataContext="{Binding TabItemAddRuleViewModel}" />
+            
+            <TabItem>
+                <TabItem.Header>
+                    <TextBlock Text="Add rule" FontSize="14" />
+                </TabItem.Header>
+                <control:AddingRuleControl DataContext="{Binding TabItemAddRuleViewModel}" />
+            </TabItem>
+            
+            
+            
+            
+            
         </TabControl>
     </Grid>
 </UserControl>

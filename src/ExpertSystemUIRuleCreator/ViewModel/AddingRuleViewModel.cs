@@ -13,19 +13,16 @@ public class TabItemAddRuleViewModel : ViewBase
     private readonly RulesManager _savingService;
     private RuleModel _rule;
 
-    public TabItemAddRuleViewModel(RulesManager savingService, IEnumerable<string> possibleConditions)
+    public TabItemAddRuleViewModel(RulesManager savingService)
     {
         _rule = new RuleModel();
         _savingService = savingService;
-        PossibleConditions = possibleConditions;
 
         RemoveConditionCommand = new LambdaCommand(ExecuteRemovingCondition, CanExecuteRemovingCondition);
         AddConditionCommand = new LambdaCommand(ExecuteAddingCondition);
 
         SaveRuleCommand = new LambdaCommand(ExecuteSavingRule, CanExecuteSavingRule);
     }
-
-    public IEnumerable<string> PossibleConditions { get; }
 
     public RuleModel Rule
     {

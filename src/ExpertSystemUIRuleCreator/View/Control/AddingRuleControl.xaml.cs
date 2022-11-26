@@ -2,9 +2,9 @@
 
 namespace ExpertSystemUIRuleCreator.View.Control;
 
-public partial class TabItemAddRule : TabItem
+public partial class AddingRuleControl : UserControl
 {
-    public TabItemAddRule()
+    public AddingRuleControl()
     {
         InitializeComponent();
     }

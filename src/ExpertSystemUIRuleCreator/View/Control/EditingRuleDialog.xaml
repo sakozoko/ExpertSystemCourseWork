@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="ExpertSystemUIRuleCreator.View.Control.EditingRuleDialog"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:ExpertSystemUIRuleCreator.View.Control"
+             xmlns:ruleContainers="clr-namespace:ExpertSystemUIRuleCreator.View.Control.ModificationRuleContainer"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="500">
+    <Grid>
+        <GroupBox Padding="0" BorderThickness="0" Header="{Binding Name}">
+                            <GroupBox.HeaderTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid Grid.Column="0" Margin="9">
+                                            <TextBlock Text="{Binding}" />
+                                        </Grid>
+                                    </Grid>
+                                </DataTemplate>
+                            </GroupBox.HeaderTemplate>
+                            <StackPanel Margin="9 0">
+                                <ruleContainers:ResultContainer  DataContext="{Binding Rule}"></ruleContainers:ResultContainer>
+                            </StackPanel>
+                        </GroupBox>
+    </Grid>
+</UserControl>

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿
 using ExpertSystemUIRuleCreator.Service;
 using ExpertSystemUIRuleCreator.ViewModel.Base;
 
@@ -6,10 +6,10 @@ namespace ExpertSystemUIRuleCreator.ViewModel;
 
 public class MainViewModel : ViewBase
 {
-    public MainViewModel(IEnumerable<string> possibleConditions, RulesManager savingService)
+    public MainViewModel(RulesManager savingService)
     {
         TabItemRulesViewModel = new TabItemRulesViewModel(savingService);
-        TabItemAddRuleViewModel = new TabItemAddRuleViewModel(savingService, possibleConditions);
+        TabItemAddRuleViewModel = new TabItemAddRuleViewModel(savingService);
     }
 
     public ViewBase TabItemRulesViewModel { get; }
