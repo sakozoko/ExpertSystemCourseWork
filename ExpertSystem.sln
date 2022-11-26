@@ -6,9 +6,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertSystemUIClient", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpertSystemUIRuleCreator", "src\ExpertSystemUIRuleCreator\ExpertSystemUIRuleCreator.csproj", "{D61720F4-3B06-4367-A84F-4AF6B3C5D73E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{3036C9C0-4AFB-419F-9C0F-540A7FA7402A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{3036C9C0-4AFB-419F-9C0F-540A7FA7402A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{4E5B1C2F-0C15-4B69-83A0-F9EC572D522B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{4E5B1C2F-0C15-4B69-83A0-F9EC572D522B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
