@@ -1,7 +1,7 @@
 ﻿using chen0040.ExpertSystem;
 using Domain.Entities;
 
-namespace ExpertSystem.Extension;
+namespace ExpertSystemClientService.Extension;
 
 public static class Mapper
 {
@@ -15,7 +15,7 @@ public static class Mapper
 
     public static Clause? MapClauseEntityToClause(this ClauseEntity jsonClause)
     {
-        return (jsonClause.Variable ?? string.Empty, jsonClause.Condition, jsonClause.Value ?? string.Empty).MapTupleClauseToClause();
+        return (jsonClause.Variable, jsonClause.Condition, jsonClause.Value).MapTupleClauseToClause();
     }
 
     public static Clause? MapTupleClauseToClause(this (string Variable, string Condition, string Value) jsonClause)

@@ -1,8 +1,8 @@
 ﻿using chen0040.ExpertSystem;
-using ExpertSystem.Extension;
 using Domain.Abstraction;
+using ExpertSystemClientService.Extension;
 
-namespace ExpertSystem;
+namespace ExpertSystemClientService;
 
 public class RuleInferenceEngineFacade : RuleInferenceEngine
 {

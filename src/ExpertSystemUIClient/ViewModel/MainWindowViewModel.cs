@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using ExpertSystem;
+using ExpertSystemClientService;
 using ExpertSystemUI.Model;
 using ExpertSystemUI.ViewModel.Base;
 using ExpertSystemUI.ViewModel.Control;
