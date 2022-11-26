@@ -6,9 +6,9 @@ using ExpertSystemUIRuleCreator.Model;
 
 namespace ExpertSystemUIRuleCreator.Service;
 
-public class RuleSavingService
+public class RulesManager
 {
-    public RuleSavingService(IRuleRepository ruleRepository)
+    public RulesManager(IRuleRepository ruleRepository)
     {
         RuleRepository = ruleRepository;
 
@@ -21,18 +21,27 @@ public class RuleSavingService
 
     private IRuleRepository RuleRepository { get; }
 
-    public void Save(RuleModel model)
+    public void Add(RuleModel model)
     {
         var rule = model.ToRuleEntity();
         RuleRepository.Add(rule);
         Rules.Add(model);
     }
 
-    public void Remove(RuleModel model)
+    public bool Update(RuleModel model)
+    {
+        if (!Remove(model)) return false;
+        
+        Add(model);
+        return true;
+
+    }
+
+    public bool Remove(RuleModel model)
     {
         var rule = model.ToRuleEntity();
         RuleRepository.Delete(rule);
-        Rules.Remove(model);
+        return Rules.Remove(model);
     }
 
 }

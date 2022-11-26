@@ -10,10 +10,10 @@ namespace ExpertSystemUIRuleCreator.ViewModel;
 
 public class TabItemAddRuleViewModel : ViewBase
 {
-    private readonly RuleSavingService _savingService;
+    private readonly RulesManager _savingService;
     private RuleModel _rule;
 
-    public TabItemAddRuleViewModel(RuleSavingService savingService, IEnumerable<string> possibleConditions)
+    public TabItemAddRuleViewModel(RulesManager savingService, IEnumerable<string> possibleConditions)
     {
         _rule = new RuleModel();
         _savingService = savingService;
@@ -53,7 +53,7 @@ public class TabItemAddRuleViewModel : ViewBase
 
     private void ExecuteSavingRule(object? parameter)
     {
-        _savingService.Save(Rule);
+        _savingService.Add(Rule);
         Rule = new RuleModel();
     }
 

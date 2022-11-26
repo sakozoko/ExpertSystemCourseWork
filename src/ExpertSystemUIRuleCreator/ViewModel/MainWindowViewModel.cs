@@ -12,7 +12,7 @@ public class MainWindowViewModel : ViewBase
 
         var ruleSource = new RuleRepositoryJson("knowledgeBase.json");
 
-        var savingService = new RuleSavingService(ruleSource);
+        var savingService = new RulesManager(ruleSource);
         MainViewModel = new MainViewModel(possibleConditions, savingService);
     }
 

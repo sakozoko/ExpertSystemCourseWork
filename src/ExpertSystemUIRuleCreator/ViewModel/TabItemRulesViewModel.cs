@@ -11,12 +11,12 @@ namespace ExpertSystemUIRuleCreator.ViewModel;
 
 public class TabItemRulesViewModel : ViewBase
 {
-    private readonly RuleSavingService _savingService;
+    private readonly RulesManager _savingService;
 
-    public TabItemRulesViewModel(RuleSavingService ruleSavingService)
+    public TabItemRulesViewModel(RulesManager rulesManager)
     {
-        _savingService = ruleSavingService;
-        Rules = ruleSavingService.Rules;
+        _savingService = rulesManager;
+        Rules = rulesManager.Rules;
         RemoveRuleCommand = new LambdaCommand(ExecuteRemovingRule);
     }
 
