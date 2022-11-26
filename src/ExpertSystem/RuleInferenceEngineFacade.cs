@@ -1,37 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.Json;
+﻿using System.Text.Json;
 using chen0040.ExpertSystem;
 using ExpertSystem.Extension;
-using ExpertSystem.Models;
+using Domain.Entities;
+using Domain.Abstraction;
 
 namespace ExpertSystem;
 
 public class RuleInferenceEngineFacade
 {
-    public RuleInferenceEngineFacade()
+    private IRuleRepository _ruleRepository;
+    private IClauseRepository _clauseRepository;
+    public RuleInferenceEngineFacade(IRuleRepository ruleRepository, IClauseRepository clauseRepository)
     {
+        _ruleRepository = ruleRepository;
+        _clauseRepository = clauseRepository;
         Engine = new RuleInferenceEngine();
-        Variables = new List<string>();
         Facts = new List<Clause?>();
         PossibleConditions = new[] { "=", "<", ">" };
+        Task.Run(async ()=> await SetKnowledgeBase());
     }
 
     public RuleInferenceEngine Engine { get; }
-    public List<string> Variables { get; }
     public List<Clause?> Facts { get; }
 
     public string[] PossibleConditions { get; }
-
-    private JsonRule[] DeserializeFromJsonFileToJsonRuleArray(string path)
-    {
-        using var stream = new StreamReader(path).BaseStream;
-        return JsonSerializer.Deserialize<JsonRule[]>(stream) ?? Array.Empty<JsonRule>();
-    }
-
-
+    
     public RuleInferenceEngineFacade SetFacts(IEnumerable<Clause?> clauses)
     {
         foreach (var clause in clauses)
@@ -59,6 +52,9 @@ public class RuleInferenceEngineFacade
         return this;
     }
 
+    public async Task<IEnumerable<string?>> GetClauseNames() => 
+        (await _clauseRepository.GetAll()).Select(c => c.Variable);
+
 
     public RuleInferenceEngineFacade SetFacts(IEnumerable<(string? Variable, string? Condition, string? Value)> facts)
     {
@@ -81,29 +77,14 @@ public class RuleInferenceEngineFacade
         Facts.Clear();
         return this;
     }
+    
 
-    public Rule MapJsonRuleToRuleAndLog(JsonRule jsonRule)
+    
+    private async Task SetKnowledgeBase()
     {
-        foreach (var jsonClause in jsonRule.Antecedent.Where(jsonClause =>
-                     !string.IsNullOrWhiteSpace(jsonClause.Variable) && !Variables.Contains(jsonClause.Variable)))
-            Variables.Add(jsonClause.Variable!);
-
-        return jsonRule.MapJsonRuleToRule();
-    }
-
-
-    public RuleInferenceEngineFacade SetKnowledgeBase(string path)
-    {
-        var jsonRules = DeserializeFromJsonFileToJsonRuleArray(path);
-        var rulesList = new List<Rule>(jsonRules.Length);
-        rulesList.AddRange(jsonRules.Select(MapJsonRuleToRuleAndLog));
-        return SetKnowledgeBase(rulesList);
-    }
-
-    public RuleInferenceEngineFacade SetKnowledgeBase(IEnumerable<Rule> rules)
-    {
-        foreach (var rule in rules)
-            Engine.AddRule(rule);
-        return this;
+        foreach (var ruleEntity in await _ruleRepository.GetAll())
+        {
+            Engine.AddRule(ruleEntity.MapRuleEntityToRule());
+        }
     }
 }

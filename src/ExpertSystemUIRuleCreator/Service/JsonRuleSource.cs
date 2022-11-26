@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using ExpertSystem.Models;
+using Domain.Entities;
 using ExpertSystemUIRuleCreator.Extension;
 using ExpertSystemUIRuleCreator.Interfaces;
 
@@ -21,28 +21,28 @@ public class JsonRuleSource : IRuleSource
         CreateFileIfNotExist();
     }
 
-    public async Task Add(JsonRule model)
+    public async Task Add(RuleEntity entity)
     {
         var rules = await GetAll();
-        var rulesList = rules.AppendToStart(model).ToList();
+        var rulesList = rules.AppendToStart(entity).ToList();
         await using var sw = new StreamWriter(_path).BaseStream;
         await JsonSerializer.SerializeAsync(sw, rulesList);
     }
 
-    public async Task<IEnumerable<JsonRule>> GetAll()
+    public async Task<IEnumerable<RuleEntity>> GetAll()
     {
         await using var sr = new StreamReader(_path).BaseStream;
-        var rules = await JsonSerializer.DeserializeAsync<JsonRule[]>(sr).ConfigureAwait(false) ??
-                    Array.Empty<JsonRule>();
+        var rules = await JsonSerializer.DeserializeAsync<RuleEntity[]>(sr).ConfigureAwait(false) ??
+                    Array.Empty<RuleEntity>();
         return rules;
     }
 
-    public async Task Remove(JsonRule model)
+    public async Task Remove(RuleEntity entity)
     {
-        //remove model from json file
+        //remove entity from json file
         var rules = await GetAll();
         var rulesList = rules.ToList();
-        rulesList.Remove(rulesList.FirstOrDefault(c => c.Name?.Equals(model.Name) ?? false) ?? new JsonRule());
+        rulesList.Remove(rulesList.FirstOrDefault(c => c.Name?.Equals(entity.Name) ?? false) ?? new RuleEntity());
         await using var sw = new StreamWriter(_path).BaseStream;
         await JsonSerializer.SerializeAsync(sw, rulesList);
     }

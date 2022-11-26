@@ -1,27 +1,27 @@
 ﻿using System;
 using System.Linq;
-using ExpertSystem.Models;
+using Domain.Entities;
 using ExpertSystemUIRuleCreator.Model;
 
 namespace ExpertSystemUIRuleCreator.Extension;
 
 public static class Mapper
 {
-    public static JsonRule ToJsonRule(this RuleModel model)
+    public static RuleEntity ToJsonRule(this Model.RuleModel model)
     {
         var validation = ValidateMapToRule(model);
         if (!validation.Validated)
             throw new ArgumentException("Property is null or empty", validation.ProblemPropertyName);
-        var resultRule = new JsonRule { Name = model.Name };
+        var resultRule = new RuleEntity { Name = model.Name };
         foreach (var modelCondition in model.Conditions)
-            resultRule.Antecedent.Add(new JsonClause
+            resultRule.Antecedent.Add(new ClauseEntity
             {
                 Condition = modelCondition.Condition!,
                 Value = modelCondition.Value,
                 Variable = modelCondition.Variable
             });
 
-        resultRule.Consequent = new JsonClause
+        resultRule.Consequent = new ClauseEntity
         {
             Condition = model.Result.Condition!,
             Value = model.Result.Value,
@@ -30,10 +30,10 @@ public static class Mapper
         return resultRule;
     }
 
-    public static RuleModel ToRuleModel(this JsonRule rule)
+    public static Model.RuleModel ToRuleModel(this RuleEntity ruleEntity)
     {
-        var model = new RuleModel { Name = rule.Name };
-        foreach (var jsonClause in rule.Antecedent)
+        var model = new Model.RuleModel { Name = ruleEntity.Name };
+        foreach (var jsonClause in ruleEntity.Antecedent)
             model.Conditions.Add(new RuleCondition
             {
                 Condition = jsonClause.Condition,
@@ -41,14 +41,14 @@ public static class Mapper
                 Variable = jsonClause.Variable
             });
 
-        model.Result.Condition = rule.Consequent!.Condition;
-        model.Result.Value = rule.Consequent.Value;
-        model.Result.Variable = rule.Consequent.Variable;
+        model.Result.Condition = ruleEntity.Consequent!.Condition;
+        model.Result.Value = ruleEntity.Consequent.Value;
+        model.Result.Variable = ruleEntity.Consequent.Variable;
 
         return model;
     }
 
-    private static (bool Validated, string ProblemPropertyName) ValidateMapToRule(RuleModel model)
+    private static (bool Validated, string ProblemPropertyName) ValidateMapToRule(Model.RuleModel model)
     {
         if (string.IsNullOrWhiteSpace(model.Name))
             return (false, nameof(model.Name));
@@ -66,7 +66,7 @@ public static class Mapper
         return (true, string.Empty);
     }
 
-    public static bool CanMapToRule(this RuleModel model)
+    public static bool CanMapToRule(this Model.RuleModel model)
     {
         return ValidateMapToRule(model).Validated;
     }

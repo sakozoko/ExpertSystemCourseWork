@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ExpertSystem.Models;
+using Domain.Entities;
 
 namespace ExpertSystemUIRuleCreator.Interfaces;
 
 public interface IRuleSource
 {
-    Task Add(JsonRule model);
-    Task<IEnumerable<JsonRule>> GetAll();
-    Task Remove(JsonRule model);
+    Task Add(RuleEntity entity);
+    Task<IEnumerable<RuleEntity>> GetAll();
+    Task Remove(RuleEntity entity);
 }

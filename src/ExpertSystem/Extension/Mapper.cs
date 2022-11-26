@@ -1,19 +1,19 @@
 ﻿using chen0040.ExpertSystem;
-using ExpertSystem.Models;
+using Domain.Entities;
 
 namespace ExpertSystem.Extension;
 
 public static class Mapper
 {
-    public static Rule MapJsonRuleToRule(this JsonRule jsonRule)
+    public static Rule MapRuleEntityToRule(this RuleEntity ruleEntity)
     {
-        var rule = new Rule(jsonRule.Name);
-        foreach (var clause in jsonRule.Antecedent) rule.AddAntecedent(MapJsonClauseToClause(clause));
-        rule.setConsequent(MapJsonClauseToClause(jsonRule.Consequent));
+        var rule = new Rule(ruleEntity.Name);
+        foreach (var clause in ruleEntity.Antecedent) rule.AddAntecedent(MapClauseEntityToClause(clause));
+        rule.setConsequent(MapClauseEntityToClause(ruleEntity.Consequent));
         return rule;
     }
 
-    public static Clause? MapJsonClauseToClause(this JsonClause? jsonClause)
+    public static Clause? MapClauseEntityToClause(this ClauseEntity? jsonClause)
     {
         if (jsonClause is null)
             return null;

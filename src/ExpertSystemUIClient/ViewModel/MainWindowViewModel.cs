@@ -1,26 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using Domain.Entities;
 using ExpertSystem;
 using ExpertSystemUI.Model;
 using ExpertSystemUI.ViewModel.Base;
 using ExpertSystemUI.ViewModel.Control;
+using Infrastructure.Repository;
 
 namespace ExpertSystemUI.ViewModel;
 
 public class MainWindowViewModel : ViewBase
 {
-    private readonly RuleInferenceEngineFacade _rief;
+    private RuleInferenceEngineFacade _rief;
+    private const string FilePath = "knowledgeBase.json";
 
-    public CreatingFactViewViewModel CreatingFactViewViewModel { get; }
+    public CreatingFactViewViewModel CreatingFactViewViewModel { get;}
     public FactsViewViewModel FactsViewViewModel { get; }
     public ResultViewViewModel ResultViewViewModel { get; }
 
     public MainWindowViewModel()
     {
-        _rief = new RuleInferenceEngineFacade();
-        _rief.SetKnowledgeBase("knowledgeBase.json");
-        var possibleVariables = new ObservableCollection<Variable>(_rief.Variables.Select(x => new Variable { Name = x }));
+        var ruleRepos = new RuleRepositoryJson(FilePath);
+        var clauseRepos = new ClauseRepositoryJson(ruleRepos.GetAll().Result);
+        _rief = new RuleInferenceEngineFacade(ruleRepos, clauseRepos);
+        var possibleVariables = new ObservableCollection<Variable>(_rief.GetClauseNames().Result.Select(x => new Variable { Name = x }));
 
         FactsViewViewModel = new FactsViewViewModel();
 
@@ -35,8 +41,8 @@ public class MainWindowViewModel : ViewBase
             PossibleVariables = possibleVariables,
             OnFactCreated = CreatingFactViewModelOnFactCreated
         };
-
     }
+
     private string ExecuteResolvingCommand(IEnumerable<Variable> facts)
     {
         _rief.SetFacts(FactsViewViewModel.Facts.Select(x => x.Deconstruct()));

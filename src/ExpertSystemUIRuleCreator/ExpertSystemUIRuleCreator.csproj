@@ -9,31 +9,31 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ExpertSystem\ExpertSystem.csproj"/>
+        <ProjectReference Include="..\ExpertSystem\ExpertSystem.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="knowledgeBase.json"/>
+        <None Remove="knowledgeBase.json" />
         <EmbeddedResource Include="knowledgeBase.json">
             <CopyToOutputDirectory>Always</CopyToOutputDirectory>
         </EmbeddedResource>
-        <None Remove="obj\**"/>
+        <None Remove="obj\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Remove="obj\**"/>
+        <Compile Remove="obj\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Remove="obj\**"/>
+        <EmbeddedResource Remove="obj\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <Page Remove="obj\**"/>
+        <Page Remove="obj\**" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci358"/>
+        <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci358" />
     </ItemGroup>
 
 </Project>
