@@ -25,9 +25,7 @@ public class CreatingFactViewViewModel :ViewBase
     private void ExecuteSettingFactCommand(object? parameter)
     {
         var selectedVariables = PossibleVariables.Where(
-                c=>!string.IsNullOrWhiteSpace(c.InputValue)
-                   && c.Condition is not null
-                   ).ToArray();
+                c=>!string.IsNullOrWhiteSpace(c.InputValue)).ToArray();
         OnFactCreated?.Invoke(selectedVariables);
         ResetVariablesValuesAndConditions(selectedVariables);
     }

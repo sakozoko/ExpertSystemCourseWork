@@ -13,14 +13,12 @@ public static class Mapper
         return rule;
     }
 
-    public static Clause? MapClauseEntityToClause(this ClauseEntity? jsonClause)
+    public static Clause? MapClauseEntityToClause(this ClauseEntity jsonClause)
     {
-        if (jsonClause is null)
-            return null;
-        return (jsonClause.Variable, jsonClause.Condition, jsonClause.Value).MapTupleClauseToClause();
+        return (jsonClause.Variable ?? string.Empty, jsonClause.Condition, jsonClause.Value ?? string.Empty).MapTupleClauseToClause();
     }
 
-    public static Clause? MapTupleClauseToClause(this (string? Variable, string? Condition, string? Value) jsonClause)
+    public static Clause? MapTupleClauseToClause(this (string Variable, string Condition, string Value) jsonClause)
     {
         return jsonClause.Condition switch
         {

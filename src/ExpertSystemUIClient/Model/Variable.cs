@@ -6,36 +6,36 @@ namespace ExpertSystemUI.Model;
 
 public class Variable : ViewBase, ICloneable
 {
-    private Condition? _condition;
-    private string? _inputValue;
-    private string? _name;
+    private Condition _condition = Condition.None;
+    private string _inputValue = string.Empty;
+    private string _name = string.Empty;
 
-    public string? Name
+    public string Name
     {
         get => _name;
         set => SetField(ref _name, value);
     }
 
-    public string? InputValue
+    public string InputValue
     {
         get => _inputValue;
         set => SetField(ref _inputValue, value);
     }
 
-    public Condition? Condition
+    public Condition Condition
     {
         get => _condition;
         set => SetField(ref _condition, value);
     }
 
-    public void Deconstruct(out string? variable, out string? condition, out string? value)
+    public void Deconstruct(out string variable, out string condition, out string value)
     {
         variable = Name;
         condition = Condition.MapToString();
         value = InputValue;
     }
 
-    public (string?, string?, string?) Deconstruct()
+    public (string, string, string) Deconstruct()
     {
         return (_name, _condition.MapToString(), _inputValue);
     }

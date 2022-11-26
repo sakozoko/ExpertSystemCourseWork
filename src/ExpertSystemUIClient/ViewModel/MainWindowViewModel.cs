@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
-using Domain.Entities;
 using ExpertSystem;
 using ExpertSystemUI.Model;
 using ExpertSystemUI.ViewModel.Base;
@@ -26,7 +23,7 @@ public class MainWindowViewModel : ViewBase
         var ruleRepos = new RuleRepositoryJson(FilePath);
         var clauseRepos = new ClauseRepositoryJson(ruleRepos.GetAll().Result);
         _rief = new RuleInferenceEngineFacade(ruleRepos, clauseRepos);
-        var possibleVariables = new ObservableCollection<Variable>(_rief.GetClauseNames().Result.Select(x => new Variable { Name = x }));
+        var possibleVariables = new ObservableCollection<Variable>(_rief.GetClauseNames().Result.Select(x => new Variable { Name = x ?? string.Empty }));
 
         FactsViewViewModel = new FactsViewViewModel();
 
@@ -47,7 +44,6 @@ public class MainWindowViewModel : ViewBase
     {
         _rief.SetFacts(FactsViewViewModel.Facts.Select(x => x.Deconstruct()));
         var result= _rief.GetResult("");
-        _rief.ClearFacts();
         return result;
     }
 
@@ -56,7 +52,7 @@ public class MainWindowViewModel : ViewBase
         //add only unique variables to user facts, if value is not unique, update it
         foreach (var variable in obj)
         {
-            var firstOrDefaultFact = FactsViewViewModel.Facts.FirstOrDefault(c => variable.Name?.Equals(c.Name)??false);
+            var firstOrDefaultFact = FactsViewViewModel.Facts.FirstOrDefault(c => variable.Name.Equals(c.Name));
             if (firstOrDefaultFact is null)
             {
                 FactsViewViewModel.Facts.Add((Variable)variable.Clone());

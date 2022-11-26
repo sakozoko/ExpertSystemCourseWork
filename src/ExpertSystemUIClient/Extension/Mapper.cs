@@ -4,13 +4,10 @@ namespace ExpertSystemUI.Extension;
 
 public static class Mapper
 {
-    public static string MapToString(this Condition? cond)
+    public static string MapToString(this Condition cond)
     {
-        if (cond is null)
-            return string.Empty;
         return (int)cond switch
         {
-            -1 => "",
             0 => "=",
             1 => ">",
             2 => "<",
