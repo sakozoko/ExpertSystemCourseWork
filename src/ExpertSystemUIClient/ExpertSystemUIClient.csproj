@@ -37,8 +37,4 @@
       <PackageReference Include="MaterialDesignThemes" Version="4.7.0-ci358" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Service" />
-    </ItemGroup>
-
 </Project>

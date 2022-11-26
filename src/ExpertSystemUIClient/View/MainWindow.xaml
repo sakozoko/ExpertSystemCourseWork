@@ -13,9 +13,6 @@
         FontFamily="pack://application:,,,/MaterialDesignThemes.Wpf;component/Resources/Roboto/#Roboto"
         mc:Ignorable="d"
         Title="Expert System Client" Height="600" Width="800">
-    <Window.DataContext>
-        <viewModel:MainWindowViewModel />
-    </Window.DataContext>
     <Window.Resources>
         <Style TargetType="ScrollBar" BasedOn="{StaticResource MaterialDesignScrollBarMinimal}" />
     </Window.Resources>
