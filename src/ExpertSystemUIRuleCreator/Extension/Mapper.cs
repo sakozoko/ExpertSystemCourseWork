@@ -7,7 +7,7 @@ namespace ExpertSystemUIRuleCreator.Extension;
 
 public static class Mapper
 {
-    public static RuleEntity ToJsonRule(this Model.RuleModel model)
+    public static RuleEntity ToRuleEntity(this RuleModel model)
     {
         var validation = ValidateMapToRule(model);
         if (!validation.Validated)
@@ -16,23 +16,23 @@ public static class Mapper
         foreach (var modelCondition in model.Conditions)
             resultRule.Antecedent.Add(new ClauseEntity
             {
-                Condition = modelCondition.Condition!,
+                Condition = modelCondition.Condition,
                 Value = modelCondition.Value,
                 Variable = modelCondition.Variable
             });
 
         resultRule.Consequent = new ClauseEntity
         {
-            Condition = model.Result.Condition!,
+            Condition = model.Result.Condition,
             Value = model.Result.Value,
             Variable = model.Result.Variable
         };
         return resultRule;
     }
 
-    public static Model.RuleModel ToRuleModel(this RuleEntity ruleEntity)
+    public static RuleModel ToRuleModel(this RuleEntity ruleEntity)
     {
-        var model = new Model.RuleModel { Name = ruleEntity.Name };
+        var model = new RuleModel { Name = ruleEntity.Name };
         foreach (var jsonClause in ruleEntity.Antecedent)
             model.Conditions.Add(new RuleCondition
             {
@@ -41,14 +41,14 @@ public static class Mapper
                 Variable = jsonClause.Variable
             });
 
-        model.Result.Condition = ruleEntity.Consequent!.Condition;
+        model.Result.Condition = ruleEntity.Consequent.Condition;
         model.Result.Value = ruleEntity.Consequent.Value;
         model.Result.Variable = ruleEntity.Consequent.Variable;
 
         return model;
     }
 
-    private static (bool Validated, string ProblemPropertyName) ValidateMapToRule(Model.RuleModel model)
+    private static (bool Validated, string ProblemPropertyName) ValidateMapToRule(RuleModel model)
     {
         if (string.IsNullOrWhiteSpace(model.Name))
             return (false, nameof(model.Name));
@@ -66,7 +66,7 @@ public static class Mapper
         return (true, string.Empty);
     }
 
-    public static bool CanMapToRule(this Model.RuleModel model)
+    public static bool CanMapToRule(this RuleModel model)
     {
         return ValidateMapToRule(model).Validated;
     }

@@ -1,5 +1,6 @@
 ﻿using ExpertSystemUIRuleCreator.Service;
 using ExpertSystemUIRuleCreator.ViewModel.Base;
+using Infrastructure.Repository;
 
 namespace ExpertSystemUIRuleCreator.ViewModel;
 
@@ -9,7 +10,7 @@ public class MainWindowViewModel : ViewBase
     {
         var possibleConditions = new[] { "=", "<", ">" };
 
-        var ruleSource = new JsonRuleSource("knowledgeBase.json");
+        var ruleSource = new RuleRepositoryJson("knowledgeBase.json");
 
         var savingService = new RuleSavingService(ruleSource);
         MainViewModel = new MainViewModel(possibleConditions, savingService);

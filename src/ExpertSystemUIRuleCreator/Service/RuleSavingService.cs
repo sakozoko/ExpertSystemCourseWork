@@ -1,42 +1,38 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using Domain.Abstraction;
 using ExpertSystemUIRuleCreator.Extension;
-using ExpertSystemUIRuleCreator.Interfaces;
 using ExpertSystemUIRuleCreator.Model;
 
 namespace ExpertSystemUIRuleCreator.Service;
 
 public class RuleSavingService
 {
-    public RuleSavingService(IRuleSource ruleSource)
+    public RuleSavingService(IRuleRepository ruleRepository)
     {
-        RuleSource = ruleSource;
+        RuleRepository = ruleRepository;
 
-        Rules = new ObservableCollection<RuleModel>(RuleSource.GetAll()
+        Rules = new ObservableCollection<RuleModel>(RuleRepository.GetAll()
             .Result
             .Select(c => c.ToRuleModel()));
     }
 
     public ObservableCollection<RuleModel> Rules { get; }
 
-    private IRuleSource RuleSource { get; }
+    private IRuleRepository RuleRepository { get; }
 
     public void Save(RuleModel model)
     {
-        var rule = model.ToJsonRule();
-        RuleSource.Add(rule);
+        var rule = model.ToRuleEntity();
+        RuleRepository.Add(rule);
         Rules.Add(model);
     }
 
     public void Remove(RuleModel model)
     {
-        var rule = model.ToJsonRule();
-        RuleSource.Remove(rule);
+        var rule = model.ToRuleEntity();
+        RuleRepository.Delete(rule);
         Rules.Remove(model);
     }
 
-    public void Save(RuleModel[] model)
-    {
-        foreach (var ruleModel in model) Save(ruleModel);
-    }
 }
