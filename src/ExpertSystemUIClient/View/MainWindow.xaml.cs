@@ -1,7 +1,6 @@
 ﻿using System.Windows;
 using ExpertSystemClientService;
 using ExpertSystemUI.ViewModel;
-using Infrastructure.Repository;
 
 namespace ExpertSystemUI.View;
 
@@ -13,10 +12,9 @@ public partial class MainWindow : Window
     public MainWindow()
     {
         InitializeComponent();
-        const string dataFilePath="knowledgeBase.json";
         Resources["PossibleConditions"] = new[] { "=", ">", "<" };
-        var ruleRepos = new RuleRepositoryJson(dataFilePath);
-        var clauseRepos = new ClauseRepositoryJson(ruleRepos.GetAll().Result);
+        var ruleRepos = Infrastructure.Source.RepositoryFactory.CreateRuleRepository();
+        var clauseRepos = Infrastructure.Source.RepositoryFactory.CreateClauseRepository();
         var rief = new RuleInferenceEngineFacade(ruleRepos, clauseRepos);
         DataContext = new MainWindowViewModel(rief);
     }
