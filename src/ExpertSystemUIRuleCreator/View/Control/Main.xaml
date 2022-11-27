@@ -19,13 +19,8 @@
                 <TabItem.Header>
                     <TextBlock Text="Add rule" FontSize="14" />
                 </TabItem.Header>
-                <control:AddingRuleControl DataContext="{Binding TabItemAddRuleViewModel}" />
+                <control:ModificationRuleControl Margin="5 0" DataContext="{Binding ModificationRuleViewModel}" />
             </TabItem>
-            
-            
-            
-            
-            
         </TabControl>
     </Grid>
 </UserControl>

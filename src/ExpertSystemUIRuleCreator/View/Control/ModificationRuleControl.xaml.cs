@@ -2,9 +2,9 @@
 
 namespace ExpertSystemUIRuleCreator.View.Control;
 
-public partial class AddingRuleControl : UserControl
+public partial class ModificationRuleControl : UserControl
 {
-    public AddingRuleControl()
+    public ModificationRuleControl()
     {
         InitializeComponent();
     }

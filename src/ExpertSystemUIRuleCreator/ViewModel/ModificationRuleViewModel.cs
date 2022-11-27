@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 using ExpertSystemUIRuleCreator.Command;
 using ExpertSystemUIRuleCreator.Extension;
 using ExpertSystemUIRuleCreator.Model;
@@ -8,26 +7,25 @@ using ExpertSystemUIRuleCreator.ViewModel.Base;
 
 namespace ExpertSystemUIRuleCreator.ViewModel;
 
-public class TabItemAddRuleViewModel : ViewBase
+public class ModificationRuleViewModel : ViewBase
 {
     private readonly RulesManager _savingService;
     private RuleModel _rule;
 
-    public TabItemAddRuleViewModel(RulesManager savingService)
+    public ModificationRuleViewModel(RulesManager savingService)
     {
         _rule = new RuleModel();
         _savingService = savingService;
 
         RemoveConditionCommand = new LambdaCommand(ExecuteRemovingCondition, CanExecuteRemovingCondition);
         AddConditionCommand = new LambdaCommand(ExecuteAddingCondition);
-
         SaveRuleCommand = new LambdaCommand(ExecuteSavingRule, CanExecuteSavingRule);
     }
 
     public RuleModel Rule
     {
         get => _rule;
-        private set => SetField(ref _rule, value);
+        set => SetField(ref _rule, value);
     }
 
     public ICommand RemoveConditionCommand { get; }

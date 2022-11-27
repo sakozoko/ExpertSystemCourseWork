@@ -41,7 +41,8 @@ public class RulesManager
     {
         var rule = model.ToRuleEntity();
         RuleRepository.Delete(rule);
-        return Rules.Remove(model);
+        var foundRule = Rules.FirstOrDefault(c => c.Name == model.Name);
+        return foundRule != null && Rules.Remove(foundRule);
     }
 
 }

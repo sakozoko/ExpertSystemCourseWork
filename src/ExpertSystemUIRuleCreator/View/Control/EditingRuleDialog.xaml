@@ -6,26 +6,35 @@
              xmlns:local="clr-namespace:ExpertSystemUIRuleCreator.View.Control"
              xmlns:ruleContainers="clr-namespace:ExpertSystemUIRuleCreator.View.Control.ModificationRuleContainer"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             mc:Ignorable="d"
-             d:DesignHeight="400" d:DesignWidth="500">
-    <Grid>
-        <GroupBox Padding="0" BorderThickness="0" Header="{Binding Name}">
-                            <GroupBox.HeaderTemplate>
-                                <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Grid Grid.Column="0" Margin="9">
-                                            <TextBlock Text="{Binding}" />
-                                        </Grid>
-                                    </Grid>
-                                </DataTemplate>
-                            </GroupBox.HeaderTemplate>
-                            <StackPanel Margin="9 0">
-                                <ruleContainers:ResultContainer  DataContext="{Binding Rule}"></ruleContainers:ResultContainer>
-                            </StackPanel>
-                        </GroupBox>
-    </Grid>
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d">
+    <GroupBox Header="Editing">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <local:ModificationRuleControl MaxHeight="500" Grid.Row="0" DataContext="{Binding }"/>
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Content="{materialDesign:PackIcon CheckBold}"
+                            Style="{StaticResource MaterialDesignIconForegroundButton}" IsDefault="True"
+                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                        <Button.CommandParameter>
+                            <system:Boolean>True</system:Boolean>
+                        </Button.CommandParameter>
+                    </Button>
+                    <Button Grid.Column="1" Content="{materialDesign:PackIcon CancelCircle}"
+                            Style="{StaticResource MaterialDesignIconForegroundButton}"
+                            IsCancel="True" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                        <Button.CommandParameter>
+                            <system:Boolean>False</system:Boolean>
+                        </Button.CommandParameter>
+                    </Button>
+                </Grid>
+            </Grid>
+        </GroupBox>
 </UserControl>

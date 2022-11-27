@@ -34,7 +34,7 @@
                                             </Grid.ColumnDefinitions>
                                             <Button Margin="0 0 9 0" Grid.Column="1" HorizontalAlignment="Right"
                                                     Style="{StaticResource MaterialDesignIconForegroundButton}" Height="24" Width="24"
-                                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=DataContext.RemoveRuleCommand}"
+                                                    Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ScrollViewer}}, Path=DataContext.EditRuleCommand}"
                                                     CommandParameter="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type GroupBox}}, Path=DataContext}">
                                                 <materialDesign:PackIcon Kind="Edit" Width="16" Height="16" />
                                             </Button>

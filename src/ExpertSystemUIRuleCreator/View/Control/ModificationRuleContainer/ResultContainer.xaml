@@ -26,16 +26,17 @@
                <WrapPanel Grid.Column="0" Margin="10 0" HorizontalAlignment="Center">
                    <TextBox materialDesign:HintAssist.Hint="Variable name" 
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                            HorizontalAlignment="Left" Text="{Binding Result.Variable, UpdateSourceTrigger=PropertyChanged}"/>
+                            HorizontalAlignment="Left" Text="{Binding Variable, UpdateSourceTrigger=PropertyChanged}"/>
                </WrapPanel>
                <WrapPanel Grid.Column="1" Margin="10 0" HorizontalAlignment="Center">
-                   <ComboBox SelectedIndex="0" materialDesign:HintAssist.Hint="Condition" 
-                             Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                             SelectedItem="{Binding Result.Condition}"
-                             ItemsSource="{DynamicResource PossibleConditions}" />
+                   <ComboBox  IsSynchronizedWithCurrentItem="True"
+                              materialDesign:HintAssist.Hint="Condition" 
+                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                              SelectedItem="{Binding Condition, UpdateSourceTrigger=PropertyChanged}"
+                              ItemsSource="{DynamicResource PossibleConditions}" />
                </WrapPanel>
                <WrapPanel Grid.Column="2" Margin="10 0" HorizontalAlignment="Center">
-                   <TextBox Text="{Binding Result.Value, UpdateSourceTrigger=PropertyChanged}"
+                   <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
                             materialDesign:HintAssist.Hint="Variable value" 
                             Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                </WrapPanel>

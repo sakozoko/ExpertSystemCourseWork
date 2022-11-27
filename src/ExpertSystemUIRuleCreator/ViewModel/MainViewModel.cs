@@ -9,9 +9,9 @@ public class MainViewModel : ViewBase
     public MainViewModel(RulesManager savingService)
     {
         TabItemRulesViewModel = new TabItemRulesViewModel(savingService);
-        TabItemAddRuleViewModel = new TabItemAddRuleViewModel(savingService);
+        ModificationRuleViewModel = new ModificationRuleViewModel(savingService);
     }
 
     public ViewBase TabItemRulesViewModel { get; }
-    public ViewBase TabItemAddRuleViewModel { get; }
+    public ViewBase ModificationRuleViewModel { get; }
 }

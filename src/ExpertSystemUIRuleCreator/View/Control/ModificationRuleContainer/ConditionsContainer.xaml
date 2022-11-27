@@ -51,10 +51,11 @@
                                                              HorizontalAlignment="Left" Text="{Binding Variable, UpdateSourceTrigger=PropertyChanged}"/>
                                                 </WrapPanel>
                                                 <WrapPanel Grid.Row="0" Grid.Column="1" Margin="10 0" HorizontalAlignment="Center">
-                                                    <ComboBox SelectedIndex="0" materialDesign:HintAssist.Hint="Condition" 
-                                                              Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                                                              SelectedItem="{Binding Condition, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                                                              ItemsSource="{DynamicResource PossibleConditions}"  />
+                                                    <ComboBox  ItemsSource="{DynamicResource PossibleConditions}"
+                                                               materialDesign:HintAssist.Hint="Condition" 
+                                                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                                               SelectedItem="{Binding Condition, UpdateSourceTrigger=PropertyChanged}"
+                                                    />
                                                 </WrapPanel>
                                                 <WrapPanel Grid.Row="0" Grid.Column="2" Margin="10 0" HorizontalAlignment="Center">
                                                     <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
