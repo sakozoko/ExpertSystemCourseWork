@@ -1,25 +1,19 @@
 ﻿using System.Windows.Input;
 using ExpertSystemUIRuleCreator.Command;
-using ExpertSystemUIRuleCreator.Extension;
 using ExpertSystemUIRuleCreator.Model;
-using ExpertSystemUIRuleCreator.Service;
 using ExpertSystemUIRuleCreator.ViewModel.Base;
 
 namespace ExpertSystemUIRuleCreator.ViewModel;
 
 public class ModificationRuleViewModel : ViewBase
 {
-    private readonly RulesManager _savingService;
     private RuleModel _rule;
 
-    public ModificationRuleViewModel(RulesManager savingService)
+    public ModificationRuleViewModel(RuleModel rule)
     {
-        _rule = new RuleModel();
-        _savingService = savingService;
-
+        _rule = rule;
         RemoveConditionCommand = new LambdaCommand(ExecuteRemovingCondition, CanExecuteRemovingCondition);
         AddConditionCommand = new LambdaCommand(ExecuteAddingCondition);
-        SaveRuleCommand = new LambdaCommand(ExecuteSavingRule, CanExecuteSavingRule);
     }
 
     public RuleModel Rule
@@ -31,34 +25,19 @@ public class ModificationRuleViewModel : ViewBase
     public ICommand RemoveConditionCommand { get; }
 
     public ICommand AddConditionCommand { get; }
-
-
-    public ICommand SaveRuleCommand { get; }
-
+    
     private void ExecuteAddingCondition(object? parameter)
     {
-        Rule.Conditions.Add(new RuleCondition());
+        Rule.Conditions.Add(new RuleConditionModel());
     }
-
-
-    private bool CanExecuteSavingRule(object? parameter)
-    {
-        return parameter is RuleModel model && model.CanMapToRule();
-    }
-
-    private void ExecuteSavingRule(object? parameter)
-    {
-        _savingService.Add(Rule);
-        Rule = new RuleModel();
-    }
-
+    
     private void ExecuteRemovingCondition(object? parameter)
     {
-        Rule.Conditions.Remove((parameter as RuleCondition)!);
+        Rule.Conditions.Remove((parameter as RuleConditionModel)!);
     }
 
     private bool CanExecuteRemovingCondition(object? parameter)
     {
-        return parameter is RuleCondition;
+        return parameter is RuleConditionModel;
     }
 }

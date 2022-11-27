@@ -1,17 +1,21 @@
-﻿
-using ExpertSystemUIRuleCreator.Service;
+﻿using ExpertSystemUIRuleCreator.Service;
 using ExpertSystemUIRuleCreator.ViewModel.Base;
 
 namespace ExpertSystemUIRuleCreator.ViewModel;
 
 public class MainViewModel : ViewBase
 {
-    public MainViewModel(RulesManager savingService)
+    private readonly RulesManager _rulesManager;
+    public MainViewModel(RulesManager rulesManager)
     {
-        TabItemRulesViewModel = new TabItemRulesViewModel(savingService);
-        ModificationRuleViewModel = new ModificationRuleViewModel(savingService);
+        _rulesManager = rulesManager;
+        RulesViewModel = new RulesViewModel(rulesManager);
+        CreatingRuleViewModel = new CreatingRuleViewModel(rulesManager);
     }
 
-    public ViewBase TabItemRulesViewModel { get; }
-    public ViewBase ModificationRuleViewModel { get; }
+    public ViewBase RulesViewModel { get; }
+    public ViewBase CreatingRuleViewModel { get; }
+
+    
+    
 }

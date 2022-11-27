@@ -21,19 +21,22 @@ public class RuleRepositoryJson : IRuleRepository
 
     public async Task Delete(RuleEntity rule)
     {
-        var resultingTuple = await TryToRemoveLocally(rule);
-        if (resultingTuple.deletionResult)
+        var resultingTuple = await CanDeletionLocally(rule);
+        if (resultingTuple.deletingRule is not null)
         {
-            await RewriteDataFile(resultingTuple.resultedEnumerable);
+            resultingTuple.cachedList.Remove(resultingTuple.deletingRule);
+            await RewriteDataFile(resultingTuple.cachedList);
         }
     }
 
     public async Task Update(RuleEntity rule)
     {
-        var resultingTuple = await TryToRemoveLocally(rule);
-        if (resultingTuple.deletionResult)
+        var resultingTuple = await CanDeletionLocally(rule);
+        if (resultingTuple.deletingRule is not null)
         {
-            await PrependAndRewriteDataFile(resultingTuple.resultedEnumerable, rule);
+            var indexOfRemovingRule = resultingTuple.cachedList.IndexOf(resultingTuple.deletingRule);
+            resultingTuple.cachedList[indexOfRemovingRule] = rule;
+            await PrependAndRewriteDataFile(resultingTuple.cachedList, rule);
         }
     }
     private async Task PrependAndRewriteDataFile(IEnumerable<RuleEntity> rules, RuleEntity rule)
@@ -48,12 +51,12 @@ public class RuleRepositoryJson : IRuleRepository
         await JsonSerializer.SerializeAsync(sw, rules);
     }
 
-    private async Task<(bool deletionResult,IEnumerable<RuleEntity> resultedEnumerable)> TryToRemoveLocally(RuleEntity removingRule)
+    private async Task<(RuleEntity? deletingRule, IList<RuleEntity> cachedList)> CanDeletionLocally(RuleEntity removingRule)
     {
         var rules = await GetAll();
         var list = rules.ToList();
         var foundRuleEntity = list.FirstOrDefault(c => c.Name?.Equals(removingRule.Name) ?? false);
-        return foundRuleEntity == null ? (false, list) : (list.Remove(removingRule), list);
+        return (foundRuleEntity, list);
     }
 
     public Task<RuleEntity> Get(int id)

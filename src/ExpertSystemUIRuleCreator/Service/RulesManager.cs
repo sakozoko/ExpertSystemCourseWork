@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using Domain.Abstraction;
 using ExpertSystemUIRuleCreator.Extension;
 using ExpertSystemUIRuleCreator.Model;
@@ -28,21 +29,25 @@ public class RulesManager
         Rules.Add(model);
     }
 
-    public bool Update(RuleModel model)
+    public async Task<bool> Update(RuleModel model)
     {
-        if (!Remove(model)) return false;
-        
-        Add(model);
+        var foundRule = Rules.FirstOrDefault(c => c.Name == model.Name);
+        if(foundRule== null)
+            return false;
+        Rules[Rules.IndexOf(foundRule)] = model;
+        var rule = model.ToRuleEntity();
+        await RuleRepository.Update(rule);
         return true;
-
     }
 
-    public bool Remove(RuleModel model)
+    public async Task<bool> Remove(RuleModel model)
     {
-        var rule = model.ToRuleEntity();
-        RuleRepository.Delete(rule);
         var foundRule = Rules.FirstOrDefault(c => c.Name == model.Name);
-        return foundRule != null && Rules.Remove(foundRule);
+        if (foundRule == null) return false;
+        
+        var rule = model.ToRuleEntity();
+        await RuleRepository.Delete(rule);
+        return Rules.Remove(foundRule);
     }
 
 }

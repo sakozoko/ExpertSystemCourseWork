@@ -4,10 +4,10 @@ using ExpertSystemUIRuleCreator.ViewModel.Base;
 
 namespace ExpertSystemUIRuleCreator.Model;
 
-public class RuleModel : ViewBase, ICloneable
+public class RuleModel : ViewBase, ICloneable, IClearable
 {
     private string _name;
-    private RuleCondition _result;
+    private RuleConditionModel _result;
 
     public RuleModel() : this(string.Empty)
     {
@@ -16,8 +16,8 @@ public class RuleModel : ViewBase, ICloneable
     private RuleModel(string name)
     {
         _name = name;
-        Conditions = new ObservableCollection<RuleCondition>();
-        _result = new RuleCondition ();
+        Conditions = new ObservableCollection<RuleConditionModel>();
+        _result = new RuleConditionModel ();
     }
 
     public string Name
@@ -26,9 +26,9 @@ public class RuleModel : ViewBase, ICloneable
         set => SetField(ref _name, value);
     }
 
-    public ObservableCollection<RuleCondition> Conditions { get; }
+    public ObservableCollection<RuleConditionModel> Conditions { get; }
 
-    public RuleCondition Result
+    public RuleConditionModel Result
     {
         get => _result;
         set => SetField(ref _result, value);
@@ -40,10 +40,16 @@ public class RuleModel : ViewBase, ICloneable
         var rule = new RuleModel(Name);
         foreach (var condition in Conditions)
         {
-            rule.Conditions.Add((RuleCondition)condition.Clone());
+            rule.Conditions.Add((RuleConditionModel)condition.Clone());
         }
-        rule.Result = (RuleCondition)Result.Clone();
+        rule.Result = (RuleConditionModel)Result.Clone();
         return rule;
     }
 
+    public void Clear()
+    {
+        Name=string.Empty;
+        Conditions.Clear();
+        Result.Clear();
+    }
 }

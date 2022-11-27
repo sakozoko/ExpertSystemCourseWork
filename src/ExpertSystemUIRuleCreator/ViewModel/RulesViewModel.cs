@@ -9,11 +9,11 @@ using MaterialDesignThemes.Wpf;
 
 namespace ExpertSystemUIRuleCreator.ViewModel;
 
-public class TabItemRulesViewModel : ViewBase
+public class RulesViewModel : ViewBase
 {
     private readonly RulesManager _rulesManager;
 
-    public TabItemRulesViewModel(RulesManager rulesManager)
+    public RulesViewModel(RulesManager rulesManager)
     {
         _rulesManager = rulesManager;
         Rules = rulesManager.Rules;
@@ -34,22 +34,19 @@ public class TabItemRulesViewModel : ViewBase
             DataContext = rule
         };
         var res = await DialogHost.Show(view, "RootDialog");
-        if (res is true) _rulesManager.Remove(rule);
+        if (res is true) await _rulesManager.Remove(rule);
     }
 
     private async void ExecuteEditingRule(object? parameter)
     {
         if (parameter is not RuleModel rule) return;
         var editingRule = (RuleModel)rule.Clone();
-        var viewModel = new ModificationRuleViewModel(_rulesManager)
-        {
-            Rule = editingRule
-        };
+        var viewModel = new ModificationRuleViewModel(editingRule);
         var view = new EditingRuleDialog()
         {
             DataContext = viewModel
         };
         var result = await DialogHost.Show(view, "RootDialog");
-        if (result is true) _rulesManager.Update(editingRule);
+        if (result is true) await _rulesManager.Update(editingRule);
     }
 }

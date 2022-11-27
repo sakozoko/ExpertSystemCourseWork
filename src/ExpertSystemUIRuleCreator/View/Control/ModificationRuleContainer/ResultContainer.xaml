@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:ExpertSystemUIRuleCreator.View.Control.ModificationRuleContainer"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d">
     <materialDesign:Card  Margin="0 10" >
@@ -12,11 +11,18 @@
                <RowDefinition Height="*"/>
                <RowDefinition Height="*"/>
            </Grid.RowDefinitions>
-           <materialDesign:Card Padding="5" Grid.Row="0" materialDesign:ElevationAssist.Elevation="Dp0"
-                                Background="{DynamicResource PrimaryHueDarkBrush}"
-                                Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}">
-               <TextBlock Text="Result" />
-           </materialDesign:Card>
+           <Border Grid.Row="0" CornerRadius="5 5 0 0 "
+                   Background="{DynamicResource PrimaryHueDarkBrush}"
+                   Padding="5" Height="34">
+               <Grid>
+                   <Grid.ColumnDefinitions>
+                       <ColumnDefinition Width="Auto" />
+                       <ColumnDefinition Width="*" />
+                       <ColumnDefinition Width="Auto" />
+                   </Grid.ColumnDefinitions>
+                   <TextBlock Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}" Grid.Column="0" Text="Result" />
+               </Grid>
+           </Border>
            <Grid Grid.Row="1" Margin="5  0 5 10">
                <Grid.ColumnDefinitions>
                    <ColumnDefinition Width="*"/>
@@ -29,10 +35,9 @@
                             HorizontalAlignment="Left" Text="{Binding Variable, UpdateSourceTrigger=PropertyChanged}"/>
                </WrapPanel>
                <WrapPanel Grid.Column="1" Margin="10 0" HorizontalAlignment="Center">
-                   <ComboBox  IsSynchronizedWithCurrentItem="True"
-                              materialDesign:HintAssist.Hint="Condition" 
+                   <ComboBox  materialDesign:HintAssist.Hint="Condition" 
                               Style="{StaticResource MaterialDesignFloatingHintComboBox}"
-                              SelectedItem="{Binding Condition, UpdateSourceTrigger=PropertyChanged}"
+                              SelectedValue="{Binding Condition, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                               ItemsSource="{DynamicResource PossibleConditions}" />
                </WrapPanel>
                <WrapPanel Grid.Column="2" Margin="10 0" HorizontalAlignment="Center">

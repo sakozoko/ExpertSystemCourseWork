@@ -34,7 +34,7 @@ public static class Mapper
     {
         var model = new RuleModel { Name = ruleEntity.Name };
         foreach (var jsonClause in ruleEntity.Antecedent)
-            model.Conditions.Add(new RuleCondition
+            model.Conditions.Add(new RuleConditionModel
             {
                 Condition = jsonClause.Condition,
                 Value = jsonClause.Value,
