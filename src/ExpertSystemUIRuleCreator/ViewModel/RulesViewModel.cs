@@ -42,7 +42,7 @@ public class RulesViewModel : ViewBase
         if (parameter is not RuleModel rule) return;
         var editingRule = (RuleModel)rule.Clone();
         var viewModel = new ModificationRuleViewModel(editingRule);
-        var view = new EditingRuleDialog()
+        var view = new EditingRuleDialog
         {
             DataContext = viewModel
         };

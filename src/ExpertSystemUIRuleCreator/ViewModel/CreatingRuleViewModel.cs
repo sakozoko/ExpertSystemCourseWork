@@ -12,14 +12,8 @@ public class CreatingRuleViewModel : ViewBase
 {
     private readonly RulesManager _rulesManager;
     private RuleModel _rule;
-    public ModificationRuleViewModel ModificationRuleViewModel { get; }
-    public RuleModel Rule
-    {
-        get => _rule;
-        set=> SetField(ref _rule, value);
-    }
-    
-    
+
+
     public CreatingRuleViewModel(RulesManager rulesManager)
     {
         _rule = new RuleModel();
@@ -29,26 +23,31 @@ public class CreatingRuleViewModel : ViewBase
         ClearRuleValuesCommand =
             new LambdaCommand(ExecuteClearingRuleValuesCommand, CanExecuteClearingRuleValuesCommand);
     }
-    
+
+    public ModificationRuleViewModel ModificationRuleViewModel { get; }
+
+    public RuleModel Rule
+    {
+        get => _rule;
+        set => SetField(ref _rule, value);
+    }
+
     public ICommand ClearRuleValuesCommand { get; }
+    public ICommand SaveRuleCommand { get; }
 
     private bool CanExecuteClearingRuleValuesCommand(object? parameter)
     {
         if (parameter is RuleModel model)
-        {
-            return !string.IsNullOrWhiteSpace(model.Name) 
-                   | AnyPropertyOfRuleConditionHasValue(model.Result) 
+            return !string.IsNullOrWhiteSpace(model.Name)
+                   | AnyPropertyOfRuleConditionHasValue(model.Result)
                    | model.Conditions.Any();
-        }
 
         return false;
     }
+
     private void ExecuteClearingRuleValuesCommand(object? parameter)
     {
-        if (parameter is IClearable model)
-        {
-            model.Clear();
-        }
+        if (parameter is IClearable model) model.Clear();
     }
 
     private static bool AnyPropertyOfRuleConditionHasValue(RuleConditionModel c)
@@ -57,11 +56,12 @@ public class CreatingRuleViewModel : ViewBase
                || !string.IsNullOrWhiteSpace(c.Value)
                || !string.IsNullOrWhiteSpace(c.Condition);
     }
+
     private bool CanExecuteSavingRule(object? parameter)
     {
         return parameter is RuleModel model && model.CanMapToRule();
     }
-    public ICommand SaveRuleCommand { get; }
+
     private void ExecuteSavingRule(object? parameter)
     {
         _rulesManager.Add(Rule);

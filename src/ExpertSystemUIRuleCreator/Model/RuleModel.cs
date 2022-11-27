@@ -17,7 +17,7 @@ public class RuleModel : ViewBase, ICloneable, IClearable
     {
         _name = name;
         Conditions = new ObservableCollection<RuleConditionModel>();
-        _result = new RuleConditionModel ();
+        _result = new RuleConditionModel();
     }
 
     public string Name
@@ -34,22 +34,19 @@ public class RuleModel : ViewBase, ICloneable, IClearable
         set => SetField(ref _result, value);
     }
 
+    public void Clear()
+    {
+        Name = string.Empty;
+        Conditions.Clear();
+        Result.Clear();
+    }
+
     //implement deep copy manually created new instance of RuleModel and its properties
     public object Clone()
     {
         var rule = new RuleModel(Name);
-        foreach (var condition in Conditions)
-        {
-            rule.Conditions.Add((RuleConditionModel)condition.Clone());
-        }
+        foreach (var condition in Conditions) rule.Conditions.Add((RuleConditionModel)condition.Clone());
         rule.Result = (RuleConditionModel)Result.Clone();
         return rule;
-    }
-
-    public void Clear()
-    {
-        Name=string.Empty;
-        Conditions.Clear();
-        Result.Clear();
     }
 }

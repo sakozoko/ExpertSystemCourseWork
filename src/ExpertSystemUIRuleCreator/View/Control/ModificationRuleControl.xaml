@@ -8,17 +8,17 @@
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" HorizontalAlignment="Left">
-                <TextBox materialDesign:HintAssist.Hint="Name of rule" 
-                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                         Text="{Binding Rule.Name, UpdateSourceTrigger=PropertyChanged}" />
-            </StackPanel>
-            <ruleContainers:ConditionsContainer Grid.Row="1" DataContext="{Binding Rule}"/>
-            <ruleContainers:ResultContainer Grid.Row="2" DataContext="{Binding Rule.Result}"/>
-        </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Left">
+            <TextBox materialDesign:HintAssist.Hint="Name of rule"
+                     Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                     Text="{Binding Rule.Name, UpdateSourceTrigger=PropertyChanged}" />
+        </StackPanel>
+        <ruleContainers:ConditionsContainer Grid.Row="1" DataContext="{Binding Rule}" />
+        <ruleContainers:ResultContainer Grid.Row="2" DataContext="{Binding Rule.Result}" />
+    </Grid>
 </UserControl>

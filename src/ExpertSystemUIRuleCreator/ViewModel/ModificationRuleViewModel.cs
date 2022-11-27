@@ -25,12 +25,12 @@ public class ModificationRuleViewModel : ViewBase
     public ICommand RemoveConditionCommand { get; }
 
     public ICommand AddConditionCommand { get; }
-    
+
     private void ExecuteAddingCondition(object? parameter)
     {
         Rule.Conditions.Add(new RuleConditionModel());
     }
-    
+
     private void ExecuteRemovingCondition(object? parameter)
     {
         Rule.Conditions.Remove((parameter as RuleConditionModel)!);

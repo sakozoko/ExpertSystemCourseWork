@@ -6,6 +6,7 @@ namespace ExpertSystemUIRuleCreator.ViewModel;
 public class MainViewModel : ViewBase
 {
     private readonly RulesManager _rulesManager;
+
     public MainViewModel(RulesManager rulesManager)
     {
         _rulesManager = rulesManager;
@@ -15,7 +16,4 @@ public class MainViewModel : ViewBase
 
     public ViewBase RulesViewModel { get; }
     public ViewBase CreatingRuleViewModel { get; }
-
-    
-    
 }

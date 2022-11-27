@@ -8,7 +8,6 @@ public class MainWindowViewModel : ViewBase
 {
     public MainWindowViewModel()
     {
-
         var ruleSource = Source.RepositoryFactory.CreateRuleRepository();
 
         var savingService = new RulesManager(ruleSource);

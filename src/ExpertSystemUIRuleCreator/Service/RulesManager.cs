@@ -32,7 +32,7 @@ public class RulesManager
     public async Task<bool> Update(RuleModel model)
     {
         var foundRule = Rules.FirstOrDefault(c => c.Name == model.Name);
-        if(foundRule== null)
+        if (foundRule == null)
             return false;
         Rules[Rules.IndexOf(foundRule)] = model;
         var rule = model.ToRuleEntity();
@@ -44,10 +44,9 @@ public class RulesManager
     {
         var foundRule = Rules.FirstOrDefault(c => c.Name == model.Name);
         if (foundRule == null) return false;
-        
+
         var rule = model.ToRuleEntity();
         await RuleRepository.Delete(rule);
         return Rules.Remove(foundRule);
     }
-
 }

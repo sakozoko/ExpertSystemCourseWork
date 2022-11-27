@@ -22,7 +22,7 @@
                 <TabItem.Header>
                     <TextBlock Text="Add rule" FontSize="14" />
                 </TabItem.Header>
-                <control:CreatingRuleControl DataContext="{Binding CreatingRuleViewModel}"/>
+                <control:CreatingRuleControl DataContext="{Binding CreatingRuleViewModel}" />
             </TabItem>
         </TabControl>
     </Grid>

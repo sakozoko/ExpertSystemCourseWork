@@ -9,19 +9,19 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <local:ModificationRuleControl Grid.Row="0" Margin="5 0" DataContext="{Binding ModificationRuleViewModel}" />
         <Grid Grid.Row="1" Margin="10 0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Style="{StaticResource MaterialDesignIconForegroundButton}" 
+            <Button Grid.Column="0" Style="{StaticResource MaterialDesignIconForegroundButton}"
                     Content="{materialDesign:PackIcon Autorenew}"
                     Command="{Binding ClearRuleValuesCommand}" CommandParameter="{Binding Rule }" />
-            <Button Grid.Column="1" Style="{StaticResource MaterialDesignIconForegroundButton}" 
+            <Button Grid.Column="1" Style="{StaticResource MaterialDesignIconForegroundButton}"
                     Content="{materialDesign:PackIcon ContentSavePlusOutline}"
                     Command="{Binding SaveRuleCommand}" CommandParameter="{Binding Rule }" />
         </Grid>
