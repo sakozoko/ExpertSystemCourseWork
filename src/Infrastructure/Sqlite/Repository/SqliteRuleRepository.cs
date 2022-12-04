@@ -16,13 +16,17 @@ public class SqliteRuleRepository : IRuleRepository
     public async Task Add(RuleEntity rule)
     {
         await _context.Rules.AddAsync(rule);
-        await _context.SaveChangesAsync().ConfigureAwait(false);
+        await _context.SaveChangesAsync()
+            .ConfigureAwait(false);
     }
 
     public async Task Delete(RuleEntity rule)
     {
-        _context.Rules.Remove(rule);
-        await _context.SaveChangesAsync().ConfigureAwait(false);
+        var existingRule = _context.Rules.Local.SingleOrDefault(c=>c.Id== rule.Id);
+        _context.Rules
+            .Remove(existingRule ?? rule);
+        await _context.SaveChangesAsync()
+            .ConfigureAwait(false);
     }
 
     public async Task Update(RuleEntity rule)
@@ -48,7 +52,8 @@ public class SqliteRuleRepository : IRuleRepository
             }
         }
         _context.Update(rule);
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync()
+            .ConfigureAwait(false);
 
     }
 
