@@ -50,7 +50,7 @@
                             <StackPanel Margin="9 0">
                                 <Expander materialDesign:ExpanderAssist.HorizontalHeaderPadding="5">
                                     <Expander.Header>
-                                        <TextBlock Text="Conditions" />
+                                        <TextBlock Text="Antecedents" />
                                     </Expander.Header>
                                     <ScrollViewer VerticalScrollBarVisibility="Auto" MaxHeight="192">
                                         <ItemsControl ItemsSource="{Binding Conditions}">
@@ -78,7 +78,7 @@
                                                                     Style="{StaticResource MaterialDesignTextBlock}"
                                                                     HorizontalAlignment="Left"
                                                                     Text="{Binding Variable}" />
-                                                                <TextBlock Text="Variable value"
+                                                                <TextBlock Text="Name"
                                                                            Style="{StaticResource MaterialDesignHelperTextBlock}" />
                                                             </StackPanel>
                                                         </WrapPanel>
@@ -89,7 +89,7 @@
                                                                     Style="{StaticResource MaterialDesignTextBlock}"
                                                                     HorizontalAlignment="Left"
                                                                     Text="{Binding Condition}" />
-                                                                <TextBlock Text="Variable value"
+                                                                <TextBlock Text="Condition"
                                                                            Style="{StaticResource MaterialDesignHelperTextBlock}" />
                                                             </StackPanel>
                                                         </WrapPanel>
@@ -99,7 +99,7 @@
                                                                 <TextBlock
                                                                     Style="{StaticResource MaterialDesignTextBlock}"
                                                                     HorizontalAlignment="Left" Text="{Binding Value}" />
-                                                                <TextBlock Text="Variable value"
+                                                                <TextBlock Text="Value"
                                                                            Style="{StaticResource MaterialDesignHelperTextBlock}" />
                                                             </StackPanel>
                                                         </WrapPanel>
@@ -126,7 +126,7 @@
                                             <StackPanel>
                                                 <TextBlock Style="{StaticResource MaterialDesignTextBlock}"
                                                            HorizontalAlignment="Left" Text="{Binding Result.Variable}" />
-                                                <TextBlock Text="Variable name"
+                                                <TextBlock Text="Name"
                                                            Style="{StaticResource MaterialDesignHelperTextBlock}" />
                                             </StackPanel>
                                         </WrapPanel>
@@ -142,7 +142,7 @@
                                             <StackPanel>
                                                 <TextBlock Style="{StaticResource MaterialDesignTextBlock}"
                                                            HorizontalAlignment="Left" Text="{Binding Result.Value}" />
-                                                <TextBlock Text="Variable value"
+                                                <TextBlock Text="Value"
                                                            Style="{StaticResource MaterialDesignHelperTextBlock}" />
                                             </StackPanel>
                                         </WrapPanel>

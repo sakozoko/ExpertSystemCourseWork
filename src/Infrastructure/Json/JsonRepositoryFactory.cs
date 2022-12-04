@@ -1,7 +1,7 @@
 ﻿using Domain.Abstraction;
-using Infrastructure.Repository;
+using Infrastructure.Json.Repository;
 
-namespace Infrastructure.Factory;
+namespace Infrastructure.Json;
 
 public class JsonRepositoryFactory : IRepositoryFactory
 {

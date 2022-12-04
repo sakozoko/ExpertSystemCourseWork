@@ -2,7 +2,7 @@
 using Domain.Abstraction;
 using Domain.Entities;
 
-namespace Infrastructure.Repository;
+namespace Infrastructure.Json.Repository;
 
 public class RuleRepositoryJson : IRuleRepository
 {

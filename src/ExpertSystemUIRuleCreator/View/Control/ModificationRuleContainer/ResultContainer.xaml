@@ -31,7 +31,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <WrapPanel Grid.Column="0" Margin="10 0" HorizontalAlignment="Center">
-                    <TextBox materialDesign:HintAssist.Hint="Variable name"
+                    <TextBox materialDesign:HintAssist.Hint="Name"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              HorizontalAlignment="Left" Text="{Binding Variable, UpdateSourceTrigger=PropertyChanged}" />
                 </WrapPanel>
@@ -43,7 +43,7 @@
                 </WrapPanel>
                 <WrapPanel Grid.Column="2" Margin="10 0" HorizontalAlignment="Center">
                     <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}"
-                             materialDesign:HintAssist.Hint="Variable value"
+                             materialDesign:HintAssist.Hint="Value"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 </WrapPanel>
             </Grid>

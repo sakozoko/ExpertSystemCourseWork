@@ -16,7 +16,7 @@ public class RuleInferenceEngineFacade : RuleInferenceEngine
     }
     
     public async Task<IEnumerable<string>> GetClauseNames() => 
-        (await _clauseRepository.GetAll()).Where(c=>!string.IsNullOrEmpty(c.Variable)).Select(c => c.Variable);
+        (await _clauseRepository.GetAll()).Where(c=>!string.IsNullOrEmpty(c.Name)).Select(c => c.Name);
 
 
     public void SetFacts(IEnumerable<(string Variable, string Condition, string Value)> facts)

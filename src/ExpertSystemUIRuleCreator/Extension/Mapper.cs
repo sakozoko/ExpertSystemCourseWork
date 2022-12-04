@@ -14,18 +14,18 @@ public static class Mapper
             throw new ArgumentException("Property is null or empty", validation.ProblemPropertyName);
         var resultRule = new RuleEntity { Name = model.Name };
         foreach (var modelCondition in model.Conditions)
-            resultRule.Antecedent.Add(new ClauseEntity
+            resultRule.Antecedents.Add(new Antecedent()
             {
                 Condition = modelCondition.Condition,
                 Value = modelCondition.Value,
-                Variable = modelCondition.Variable
+                Name = modelCondition.Variable
             });
 
-        resultRule.Consequent = new ClauseEntity
+        resultRule.Conclusion = new Conclusion()
         {
             Condition = model.Result.Condition,
             Value = model.Result.Value,
-            Variable = model.Result.Variable
+            Name = model.Result.Variable
         };
         return resultRule;
     }
@@ -33,17 +33,17 @@ public static class Mapper
     public static RuleModel ToRuleModel(this RuleEntity ruleEntity)
     {
         var model = new RuleModel { Name = ruleEntity.Name };
-        foreach (var jsonClause in ruleEntity.Antecedent)
+        foreach (var jsonClause in ruleEntity.Antecedents)
             model.Conditions.Add(new RuleConditionModel
             {
                 Condition = jsonClause.Condition,
                 Value = jsonClause.Value,
-                Variable = jsonClause.Variable
+                Variable = jsonClause.Name
             });
 
-        model.Result.Condition = ruleEntity.Consequent.Condition;
-        model.Result.Value = ruleEntity.Consequent.Value;
-        model.Result.Variable = ruleEntity.Consequent.Variable;
+        model.Result.Condition = ruleEntity.Conclusion.Condition;
+        model.Result.Value = ruleEntity.Conclusion.Value;
+        model.Result.Variable = ruleEntity.Conclusion.Name;
 
         return model;
     }

@@ -1,15 +1,15 @@
 ﻿using Domain.Abstraction;
 using Domain.Entities;
+using Infrastructure.Json;
 
-namespace Infrastructure.Repository;
+namespace Infrastructure.Sqlite.Repository;
 
-public class ClauseRepositoryJson : IClauseRepository
+public class SqliteClauseRepository : IClauseRepository
 {
-    private readonly IEnumerable<RuleEntity> _rules;
-
-    public ClauseRepositoryJson(IEnumerable<RuleEntity> rules)
+    private ExpertSystemDbContext _context;
+    public SqliteClauseRepository(ExpertSystemDbContext context)
     {
-        _rules= rules;
+        _context = context;
     }
     public Task Add(ClauseEntity rule)
     {
@@ -31,8 +31,8 @@ public class ClauseRepositoryJson : IClauseRepository
         throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<ClauseEntity>> GetAll()
+    public Task<IEnumerable<ClauseEntity>> GetAll()
     {
-        return await Task.FromResult(_rules.SelectMany(c => c.Antecedent).DistinctBy(c=>c.Variable));
+        throw new NotImplementedException();
     }
 }
