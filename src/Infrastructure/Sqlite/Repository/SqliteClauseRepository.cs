@@ -1,6 +1,7 @@
 ﻿using Domain.Abstraction;
 using Domain.Entities;
 using Infrastructure.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Sqlite.Repository;
 
@@ -31,8 +32,8 @@ public class SqliteClauseRepository : IClauseRepository
         throw new NotImplementedException();
     }
 
-    public Task<IEnumerable<ClauseEntity>> GetAll()
+    public async Task<IEnumerable<ClauseEntity>> GetAll()
     {
-        throw new NotImplementedException();
+        return await _context.Conditions.ToListAsync();
     }
 }
