@@ -12,39 +12,43 @@ public static class Mapper
         var validation = ValidateMapToRule(model);
         if (!validation.Validated)
             throw new ArgumentException("Property is null or empty", validation.ProblemPropertyName);
-        var resultRule = new RuleEntity { Name = model.Name };
+        var resultRule = new RuleEntity { Id=model.Id,Name = model.Name };
         foreach (var modelCondition in model.Conditions)
             resultRule.Antecedents.Add(new Antecedent()
             {
+                Id = modelCondition.Id,
                 Condition = modelCondition.Condition,
                 Value = modelCondition.Value,
-                Name = modelCondition.Variable
+                Name = modelCondition.Variable,
+                RuleId = model.Id
             });
 
         resultRule.Conclusion = new Conclusion()
         {
+            Id=model.Result.Id,
             Condition = model.Result.Condition,
             Value = model.Result.Value,
             Name = model.Result.Variable
         };
+        resultRule.ConclusionId= resultRule.Conclusion.Id;
         return resultRule;
     }
 
     public static RuleModel ToRuleModel(this RuleEntity ruleEntity)
     {
-        var model = new RuleModel { Name = ruleEntity.Name };
-        foreach (var jsonClause in ruleEntity.Antecedents)
+        var model = new RuleModel {Id=ruleEntity.Id, Name = ruleEntity.Name };
+        foreach (var clauseEntity in ruleEntity.Antecedents)
             model.Conditions.Add(new RuleConditionModel
             {
-                Condition = jsonClause.Condition,
-                Value = jsonClause.Value,
-                Variable = jsonClause.Name
+                Id = clauseEntity.Id,
+                Condition = clauseEntity.Condition,
+                Value = clauseEntity.Value,
+                Variable = clauseEntity.Name
             });
-
+        model.Result.Id=ruleEntity.Conclusion.Id;
         model.Result.Condition = ruleEntity.Conclusion.Condition;
         model.Result.Value = ruleEntity.Conclusion.Value;
         model.Result.Variable = ruleEntity.Conclusion.Name;
-
         return model;
     }
 

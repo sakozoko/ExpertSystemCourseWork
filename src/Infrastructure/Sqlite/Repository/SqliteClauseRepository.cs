@@ -35,6 +35,6 @@ public class SqliteClauseRepository : IClauseRepository
 
     public async Task<IEnumerable<ClauseEntity>> GetAll()
     {
-        return await _context.Conditions.ToListAsync();
+        return await _context.Antecedents.ToListAsync();
     }
 }

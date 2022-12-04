@@ -6,15 +6,17 @@ namespace ExpertSystemUIRuleCreator.Model;
 
 public class RuleModel : ViewBase, ICloneable, IClearable
 {
+    public int Id { get; set; }
     private string _name;
     private RuleConditionModel _result;
 
-    public RuleModel() : this(string.Empty)
+    public RuleModel() : this(0,string.Empty)
     {
     }
 
-    private RuleModel(string name)
+    private RuleModel(int id,string name)
     {
+        Id = id;
         _name = name;
         Conditions = new ObservableCollection<RuleConditionModel>();
         _result = new RuleConditionModel();
@@ -44,9 +46,11 @@ public class RuleModel : ViewBase, ICloneable, IClearable
     //implement deep copy manually created new instance of RuleModel and its properties
     public object Clone()
     {
-        var rule = new RuleModel(Name);
+        var rule = new RuleModel(Id,Name);
         foreach (var condition in Conditions) rule.Conditions.Add((RuleConditionModel)condition.Clone());
         rule.Result = (RuleConditionModel)Result.Clone();
         return rule;
     }
+
+
 }

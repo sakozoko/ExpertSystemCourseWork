@@ -5,6 +5,7 @@ namespace ExpertSystemUIRuleCreator.Model;
 
 public class RuleConditionModel : ViewBase, ICloneable, IClearable
 {
+    public int Id { get; set; }
     private string _condition = string.Empty;
     private string _value = string.Empty;
     private string _variable = string.Empty;
@@ -40,6 +41,7 @@ public class RuleConditionModel : ViewBase, ICloneable, IClearable
     {
         return new RuleConditionModel
         {
+            Id=Id,
             Variable = Variable,
             Condition = Condition,
             Value = Value

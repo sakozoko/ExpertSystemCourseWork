@@ -8,7 +8,7 @@ public class ExpertSystemDbContext : DbContext
     public DbSet<RuleEntity> Rules { get; set; }
 
     public DbSet<Conclusion> Conclusions { get; set; }
-    public DbSet<Antecedent> Conditions { get; set; }
+    public DbSet<Antecedent> Antecedents { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -19,6 +19,8 @@ public class ExpertSystemDbContext : DbContext
     {
         modelBuilder.Entity<RuleEntity>(entity =>
         {
+            entity.Property(c => c.Name).HasMaxLength(50);
+            entity.HasIndex(c => c.Name).IsUnique();
             entity.HasMany(e => e.Antecedents)
                 .WithOne().HasForeignKey(c => c.RuleId)
                 .OnDelete(DeleteBehavior.Cascade);
