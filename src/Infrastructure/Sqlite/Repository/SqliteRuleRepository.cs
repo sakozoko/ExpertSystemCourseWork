@@ -1,6 +1,5 @@
 ﻿using Domain.Abstraction;
 using Domain.Entities;
-using Infrastructure.Json;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Sqlite.Repository;
@@ -13,7 +12,7 @@ public class SqliteRuleRepository : IRuleRepository
     {
         _context = dbContext;
     }
-    
+
     public async Task Add(RuleEntity rule)
     {
         await _context.Rules.AddAsync(rule);
@@ -35,17 +34,17 @@ public class SqliteRuleRepository : IRuleRepository
     public async Task<RuleEntity?> Get(int id)
     {
         return await _context.Rules
-            .Include(c=>c.Antecedents)
-            .Include(c=>c.Conclusion)
-            .FirstAsync(c=>c.Id==id)
+            .Include(c => c.Antecedents)
+            .Include(c => c.Conclusion)
+            .FirstAsync(c => c.Id == id)
             .ConfigureAwait(false);
     }
 
     public async Task<IEnumerable<RuleEntity>> GetAll()
     {
         return await _context.Rules
-            .Include(c=>c.Antecedents)
-            .Include(c=>c.Conclusion)
+            .Include(c => c.Antecedents)
+            .Include(c => c.Conclusion)
             .ToListAsync()
             .ConfigureAwait(false);
     }

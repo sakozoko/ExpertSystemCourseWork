@@ -1,5 +1,4 @@
 ﻿using Domain.Abstraction;
-using Infrastructure.Json;
 using Infrastructure.Sqlite.Repository;
 
 namespace Infrastructure.Sqlite;
@@ -12,7 +11,7 @@ public class SqliteRepositoryFactory : IRepositoryFactory
     {
         _context = dbContext;
     }
-    
+
     public IClauseRepository CreateClauseRepository()
     {
         return new SqliteClauseRepository(_context);

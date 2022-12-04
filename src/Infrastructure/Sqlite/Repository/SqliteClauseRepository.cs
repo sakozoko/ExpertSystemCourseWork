@@ -1,17 +1,18 @@
 ﻿using Domain.Abstraction;
 using Domain.Entities;
-using Infrastructure.Json;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Sqlite.Repository;
 
 public class SqliteClauseRepository : IClauseRepository
 {
-    private ExpertSystemDbContext _context;
+    private readonly ExpertSystemDbContext _context;
+
     public SqliteClauseRepository(ExpertSystemDbContext context)
     {
         _context = context;
     }
+
     public Task Add(ClauseEntity rule)
     {
         throw new NotImplementedException();

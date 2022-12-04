@@ -12,10 +12,7 @@ public class ExpertSystemDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlite("Data Source=Db.db");
-        }
+        if (!optionsBuilder.IsConfigured) optionsBuilder.UseSqlite("Data Source=Db.db");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,10 +20,10 @@ public class ExpertSystemDbContext : DbContext
         modelBuilder.Entity<RuleEntity>(entity =>
         {
             entity.HasMany(e => e.Antecedents)
-                .WithOne().HasForeignKey(c=>c.RuleId)
+                .WithOne().HasForeignKey(c => c.RuleId)
                 .OnDelete(DeleteBehavior.Cascade);
-            entity.HasOne(c=>c.Conclusion)
-                .WithOne().HasForeignKey<RuleEntity>(c=>c.ConclusionId)
+            entity.HasOne(c => c.Conclusion)
+                .WithOne().HasForeignKey<RuleEntity>(c => c.ConclusionId)
                 .OnDelete(DeleteBehavior.Cascade);
             entity.Property(c => c.Name).HasMaxLength(50);
         });

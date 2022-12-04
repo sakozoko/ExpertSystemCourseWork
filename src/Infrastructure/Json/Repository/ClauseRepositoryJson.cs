@@ -9,12 +9,12 @@ public class ClauseRepositoryJson : IClauseRepository
 
     public ClauseRepositoryJson(IEnumerable<RuleEntity> rules)
     {
-        _rules= rules;
+        _rules = rules;
     }
+
     public Task Add(ClauseEntity rule)
     {
         throw new NotImplementedException();
-        
     }
 
     public Task Delete(ClauseEntity rule)
@@ -34,6 +34,6 @@ public class ClauseRepositoryJson : IClauseRepository
 
     public async Task<IEnumerable<ClauseEntity>> GetAll()
     {
-        return await Task.FromResult(_rules.SelectMany(c => c.Antecedents).DistinctBy(c=>c.Name));
+        return await Task.FromResult(_rules.SelectMany(c => c.Antecedents).DistinctBy(c => c.Name));
     }
 }

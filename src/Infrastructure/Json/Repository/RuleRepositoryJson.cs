@@ -39,25 +39,6 @@ public class RuleRepositoryJson : IRuleRepository
             await PrependAndRewriteDataFile(resultingTuple.cachedList, rule);
         }
     }
-    private async Task PrependAndRewriteDataFile(IEnumerable<RuleEntity> rules, RuleEntity rule)
-    {
-        var rulesWithNewRule = rules.Prepend(rule);
-        await RewriteDataFile(rulesWithNewRule);
-    }
-    
-    private async Task RewriteDataFile(IEnumerable<RuleEntity> rules)
-    {
-        await using var sw = new StreamWriter(_path).BaseStream;
-        await JsonSerializer.SerializeAsync(sw, rules);
-    }
-
-    private async Task<(RuleEntity? deletingRule, IList<RuleEntity> cachedList)> CanDeletionLocally(RuleEntity removingRule)
-    {
-        var rules = await GetAll();
-        var list = rules.ToList();
-        var foundRuleEntity = list.FirstOrDefault(c => c.Name?.Equals(removingRule.Name) ?? false);
-        return (foundRuleEntity, list);
-    }
 
     public Task<RuleEntity> Get(int id)
     {
@@ -67,7 +48,29 @@ public class RuleRepositoryJson : IRuleRepository
     public async Task<IEnumerable<RuleEntity>> GetAll()
     {
         await using var sr = new StreamReader(_path).BaseStream;
-        var rules = await JsonSerializer.DeserializeAsync<RuleEntity[]>(sr).ConfigureAwait(false) ?? Array.Empty<RuleEntity>();
+        var rules = await JsonSerializer.DeserializeAsync<RuleEntity[]>(sr).ConfigureAwait(false) ??
+                    Array.Empty<RuleEntity>();
         return rules;
+    }
+
+    private async Task PrependAndRewriteDataFile(IEnumerable<RuleEntity> rules, RuleEntity rule)
+    {
+        var rulesWithNewRule = rules.Prepend(rule);
+        await RewriteDataFile(rulesWithNewRule);
+    }
+
+    private async Task RewriteDataFile(IEnumerable<RuleEntity> rules)
+    {
+        await using var sw = new StreamWriter(_path).BaseStream;
+        await JsonSerializer.SerializeAsync(sw, rules);
+    }
+
+    private async Task<(RuleEntity? deletingRule, IList<RuleEntity> cachedList)> CanDeletionLocally(
+        RuleEntity removingRule)
+    {
+        var rules = await GetAll();
+        var list = rules.ToList();
+        var foundRuleEntity = list.FirstOrDefault(c => c.Name?.Equals(removingRule.Name) ?? false);
+        return (foundRuleEntity, list);
     }
 }
