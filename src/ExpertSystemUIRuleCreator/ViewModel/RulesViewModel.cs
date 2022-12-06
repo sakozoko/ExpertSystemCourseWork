@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
-using ExpertSystemUIRuleCreator.Command;
 using ExpertSystemUIRuleCreator.Model;
 using ExpertSystemUIRuleCreator.Service;
 using ExpertSystemUIRuleCreator.View.Control;
-using ExpertSystemUIRuleCreator.ViewModel.Base;
 using MaterialDesignThemes.Wpf;
+using WPFBase.Command;
+using WPFBase.ViewModel.Base;
 
 namespace ExpertSystemUIRuleCreator.ViewModel;
 

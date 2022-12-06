@@ -5,7 +5,7 @@ namespace Infrastructure.Json;
 
 public class JsonRepositoryFactory : IRepositoryFactory
 {
-    private const string DataFilePath = "knowledgeBase.json";
+    private const string DataFilePath = "Db.json";
 
     public IClauseRepository CreateClauseRepository()
     {

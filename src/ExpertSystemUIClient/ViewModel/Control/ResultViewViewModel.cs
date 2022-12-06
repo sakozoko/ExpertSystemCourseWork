@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
-using ExpertSystemUI.Command;
 using ExpertSystemUI.Model;
-using ExpertSystemUI.ViewModel.Base;
+using WPFBase.Command;
+using WPFBase.ViewModel.Base;
 
 namespace ExpertSystemUI.ViewModel.Control;
 

@@ -1,7 +1,6 @@
-﻿using System;
-using System.Windows.Input;
+﻿using System.Windows.Input;
 
-namespace ExpertSystemUI.Command.Base;
+namespace WPFBase.Command.Base;
 
 public abstract class CommandBase : ICommand
 {

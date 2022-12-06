@@ -15,6 +15,7 @@
     <ItemGroup>
         <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
         <ProjectReference Include="..\ExpertSystemClientService\ExpertSystemClientService.csproj" />
+        <ProjectReference Include="..\WPFBase\WPFBase.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -24,9 +25,6 @@
     <ItemGroup>
       <EmbeddedResource Remove="obj\**" />
       <None Remove="knowledgeBase.json" />
-      <EmbeddedResource Include="knowledgeBase.json">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>

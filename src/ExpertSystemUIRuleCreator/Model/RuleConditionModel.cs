@@ -1,5 +1,5 @@
 ﻿using System;
-using ExpertSystemUIRuleCreator.ViewModel.Base;
+using WPFBase.ViewModel.Base;
 
 namespace ExpertSystemUIRuleCreator.Model;
 

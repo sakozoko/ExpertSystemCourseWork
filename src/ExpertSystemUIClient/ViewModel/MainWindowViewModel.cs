@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Windows.Controls;
 using ExpertSystemClientService;
 using ExpertSystemUI.Model;
-using ExpertSystemUI.ViewModel.Base;
 using ExpertSystemUI.ViewModel.Control;
 
 namespace ExpertSystemUI.ViewModel;

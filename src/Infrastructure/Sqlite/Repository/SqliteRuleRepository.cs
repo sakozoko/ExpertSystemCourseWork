@@ -57,7 +57,7 @@ public class SqliteRuleRepository : IRuleRepository
 
     }
 
-    public async Task<RuleEntity?> Get(int id)
+    public async Task<RuleEntity> Get(int id)
     {
         return await _context.Rules
             .Include(c => c.Antecedents)

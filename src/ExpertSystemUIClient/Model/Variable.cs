@@ -1,6 +1,6 @@
 ﻿using System;
 using ExpertSystemUI.Extension;
-using ExpertSystemUI.ViewModel.Base;
+using WPFBase.ViewModel.Base;
 
 namespace ExpertSystemUI.Model;
 

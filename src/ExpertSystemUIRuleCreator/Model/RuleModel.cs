@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using ExpertSystemUIRuleCreator.ViewModel.Base;
+using WPFBase.ViewModel.Base;
 
 namespace ExpertSystemUIRuleCreator.Model;
 

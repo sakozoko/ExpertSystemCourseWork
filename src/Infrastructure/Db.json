@@ -1,210 +1,210 @@
 [
   {
     "Name": "Bicycle",
-    "Antecedent": [
+    "Antecedents": [
       {
-        "Variable": "num_wheels",
+        "Name": "num_wheels",
         "Condition": "=",
         "Value": "2"
       },
       {
-        "Variable": "motor",
+        "Name": "motor",
         "Condition": "=",
         "Value": "no"
       },
       {
-        "Variable": "vehicleType",
+        "Name": "vehicleType",
         "Condition": "=",
         "Value": "cycle"
       }
     ],
-    "Consequent": {
-      "Variable": "vehicle",
+    "Conclusion": {
+      "Name": "vehicle",
       "Condition": "=",
       "Value": "Bicycle"
     }
   },
   {
     "Name": "Tricycle",
-    "Antecedent": [
+    "Antecedents": [
       {
-        "Variable": "num_wheels",
+        "Name": "num_wheels",
         "Condition": "=",
         "Value": "3"
       },
       {
         "Condition": "=",
-        "Variable": "motor",
+        "Name": "motor",
         "Value": "no"
       },
       {
         "Condition": "=",
-        "Variable": "vehicleType",
+        "Name": "vehicleType",
         "Value": "cycle"
       }
     ],
-    "Consequent": {
+    "Conclusion": {
       "Condition": "=",
-      "Variable": "vehicle",
+      "Name": "vehicle",
       "Value": "Tricycle"
     }
   },
   {
     "Name": "Motorcycle",
-    "Antecedent": [
+    "Antecedents": [
       {
         "Condition": "=",
-        "Variable": "num_wheels",
+        "Name": "num_wheels",
         "Value": "2"
       },
       {
         "Condition": "=",
-        "Variable": "motor",
+        "Name": "motor",
         "Value": "yes"
       },
       {
         "Condition": "=",
-        "Variable": "vehicleType",
+        "Name": "vehicleType",
         "Value": "cycle"
       }
     ],
-    "Consequent": {
+    "Conclusion": {
       "Condition": "=",
-      "Variable": "vehicle",
+      "Name": "vehicle",
       "Value": "Motorcycle"
     }
   },
   {
     "Name": "SportsCar",
-    "Antecedent": [
+    "Antecedents": [
       {
         "Condition": "=",
-        "Variable": "num_doors",
+        "Name": "num_doors",
         "Value": "2"
       },
       {
         "Condition": "=",
-        "Variable": "size",
+        "Name": "size",
         "Value": "medium"
       },
       {
         "Condition": "=",
-        "Variable": "vehicleType",
+        "Name": "vehicleType",
         "Value": "automobile"
       }
     ],
-    "Consequent": {
+    "Conclusion": {
       "Condition": "=",
-      "Variable": "vehicle",
+      "Name": "vehicle",
       "Value": "Sports_Car"
     }
   },
   {
     "Name": "Sedan",
-    "Antecedent": [
+    "Antecedents": [
       {
         "Condition": "=",
-        "Variable": "num_doors",
+        "Name": "num_doors",
         "Value": "4"
       },
       {
         "Condition": "=",
-        "Variable": "size",
+        "Name": "size",
         "Value": "medium"
       },
       {
         "Condition": "=",
-        "Variable": "vehicleType",
+        "Name": "vehicleType",
         "Value": "automobile"
       }
     ],
-    "Consequent": {
+    "Conclusion": {
       "Condition": "=",
-      "Variable": "vehicle",
+      "Name": "vehicle",
       "Value": "Sedan"
     }
   },
   {
     "Name": "MiniVan",
-    "Antecedent": [
+    "Antecedents": [
       {
         "Condition": "=",
-        "Variable": "vehicleType",
+        "Name": "vehicleType",
         "Value": "automobile"
       },
       {
         "Condition": "=",
-        "Variable": "num_doors",
+        "Name": "num_doors",
         "Value": "3"
       },
       {
         "Condition": "=",
-        "Variable": "size",
+        "Name": "size",
         "Value": "medium"
       }
     ],
-    "Consequent": {
+    "Conclusion": {
       "Condition": "=",
-      "Variable": "vehicle",
+      "Name": "vehicle",
       "Value": "MiniVan"
     }
   },
   {
     "Name": "SUV",
-    "Antecedent": [
+    "Antecedents": [
       {
         "Condition": "=",
-        "Variable": "num_doors",
+        "Name": "num_doors",
         "Value": "4"
       },
       {
         "Condition": "=",
-        "Variable": "size",
+        "Name": "size",
         "Value": "large"
       },
       {
         "Condition": "=",
-        "Variable": "vehicleType",
+        "Name": "vehicleType",
         "Value": "automobile"
       }
     ],
-    "Consequent": {
+    "Conclusion": {
       "Condition": "=",
-      "Variable": "vehicle",
+      "Name": "vehicle",
       "Value": "SUV"
     }
   },
   {
     "Name": "Cycle",
-    "Antecedent": [
+    "Antecedents": [
       {
         "Condition": "<",
-        "Variable": "num_wheels",
+        "Name": "num_wheels",
         "Value": "4"
       }
     ],
-    "Consequent": {
+    "Conclusion": {
       "Condition": "=",
-      "Variable": "vehicleType",
+      "Name": "vehicleType",
       "Value": "cycle"
     }
   },
   {
     "Name": "Automobile",
-    "Antecedent": [
+    "Antecedents": [
       {
-        "Variable": "num_wheels",
+        "Name": "num_wheels",
         "Condition": "=",
         "Value": "4"
       },
       {
-        "Variable": "motor",
+        "Name": "motor",
         "Condition": "=",
         "Value": "yes"
       }
     ],
-    "Consequent": {
-      "Variable": "vehicleType",
+    "Conclusion": {
+      "Name": "vehicleType",
       "Condition": "=",
       "Value": "automobile"
     }

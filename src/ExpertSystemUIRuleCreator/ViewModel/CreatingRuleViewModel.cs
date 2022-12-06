@@ -1,10 +1,10 @@
 ﻿using System.Linq;
 using System.Windows.Input;
-using ExpertSystemUIRuleCreator.Command;
 using ExpertSystemUIRuleCreator.Extension;
 using ExpertSystemUIRuleCreator.Model;
 using ExpertSystemUIRuleCreator.Service;
-using ExpertSystemUIRuleCreator.ViewModel.Base;
+using WPFBase.Command;
+using WPFBase.ViewModel.Base;
 
 namespace ExpertSystemUIRuleCreator.ViewModel;
 

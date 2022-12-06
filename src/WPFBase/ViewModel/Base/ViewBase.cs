@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace ExpertSystemUIRuleCreator.ViewModel.Base;
+namespace WPFBase.ViewModel.Base;
 
 public class ViewBase : INotifyPropertyChanged
 {

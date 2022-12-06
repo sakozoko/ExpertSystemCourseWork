@@ -1,7 +1,6 @@
-﻿using System;
-using ExpertSystemUIRuleCreator.Command.Base;
+﻿using WPFBase.Command.Base;
 
-namespace ExpertSystemUIRuleCreator.Command;
+namespace WPFBase.Command;
 
 public class LambdaCommand : CommandBase
 {
